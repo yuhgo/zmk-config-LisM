@@ -36,11 +36,6 @@
             key-positions = <6 7 8>;
         };
 
-        to-6-layer {
-            bindings = <&mo 6>;
-            key-positions = <38 37>;
-        };
-
         minus {
             bindings = <&kp MINUS>;
             key-positions = <2 3>;
@@ -63,12 +58,12 @@
 
         en {
             bindings = <&kp LANG2>;
-            key-positions = <23 24>;
+            key-positions = <23 22>;
         };
 
         ja {
             bindings = <&kp LANG1>;
-            key-positions = <31 32>;
+            key-positions = <26 27>;
         };
     };
 
