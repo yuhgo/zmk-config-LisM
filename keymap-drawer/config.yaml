@@ -1,11 +1,11 @@
 parse_config:
   layer_names:
     - Default Layer
-    - Mouse Layer
-    - Function Number Layer
     - Mark Layer
-    - Util Layer
     - Arrow Layer
+    - Function Number Layer
+    - Mouse Layer
+    - Util Layer
     - Scroll Layer
     - Window Layer
 
