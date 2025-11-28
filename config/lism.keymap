@@ -176,10 +176,10 @@
             status = "reserved";
             display-name = "Arrow Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+    &trans          &trans      &trans      &trans      &trans        &trans      &trans      &trans      &trans      &trans
+    &kp LG(LEFT)    &trans      &trans      &kp LG(RIGHT)   &trans      &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT   &trans
+    &trans          &trans      &trans      &trans      &trans        &trans      &trans      &trans      &trans      &trans
+    &trans          &trans      &trans      &trans      &trans        &trans      &trans      &trans      &trans      &trans      &trans      &trans
             >;
         };
 
