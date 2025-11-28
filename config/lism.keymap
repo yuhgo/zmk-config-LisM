@@ -13,6 +13,65 @@
 &lt { quick-tap-ms = <300>; };
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <11 12>;
+        };
+
+        shift_tab {
+            bindings = <&kp LS(TAB)>;
+            key-positions = <1 2>;
+        };
+
+        shift-z {
+            bindings = <&kp LS(Z)>;
+            key-positions = <22 23>;
+        };
+
+        to_window_layer {
+            bindings = <&mo 7>;
+            key-positions = <6 7 8>;
+        };
+
+        to-6-layer {
+            bindings = <&mo 6>;
+            key-positions = <38 37>;
+        };
+
+        minus {
+            bindings = <&kp MINUS>;
+            key-positions = <2 3>;
+        };
+
+        plus {
+            bindings = <&kp PLUS>;
+            key-positions = <6 7>;
+        };
+
+        asterisk {
+            bindings = <&kp ASTERISK>;
+            key-positions = <12 13>;
+        };
+
+        slash {
+            bindings = <&kp SLASH>;
+            key-positions = <18 19>;
+        };
+
+        en {
+            bindings = <&kp LANG2>;
+            key-positions = <23 24>;
+        };
+
+        ja {
+            bindings = <&kp LANG1>;
+            key-positions = <31 32>;
+        };
+    };
+
     macros {
         emoji: emoji_macro {
             compatible = "zmk,behavior-macro";
@@ -25,6 +84,55 @@
                 <&kp E>,
                 <&macro_release>,
                 <&kp CAPSLOCK>;
+        };
+
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_0";
+        };
+
+        screenshot: screenshot {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LS(NUMBER_5))>;
+            label = "SCREENSHOT";
+        };
+
+        master_p: master_p {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp J &kp F &kp J &kp F &kp H &kp G &kp H &kp G &kp UNDER &kp Y &kp U &kp H &kp G &kp O &kp UNDER &kp N0 &kp N9 &kp N0 &kp N7 &kp UNDER &kp N2 &kp N5 &kp N2 &kp N5>;
+            label = "MASTER_P";
+        };
+
+        mac_p: mac_p {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp J &kp F &kp J &kp F &kp H &kp G &kp H &kp G>;
+            label = "MAC_P";
+        };
+
+        presentify: presentify {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(LA(LC(LG(O))))>;
+            label = "PRESENTIFY";
+        };
+
+        browser_back: browser_back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LEFT)>;
+            label = "BROWSER_BACK";
+        };
+
+        browser_next: browser_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(RIGHT)>;
+            label = "BROWSER_NEXT";
         };
     };
 
