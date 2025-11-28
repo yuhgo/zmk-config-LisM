@@ -1,4 +1,14 @@
 parse_config:
+  layer_names:
+    - Default Layer
+    - Mouse Layer
+    - Function Number Layer
+    - Mark Layer
+    - Util Layer
+    - Arrow Layer
+    - Scroll Layer
+    - Window Layer
+
   raw_binding_map:
     '&sys_reset': Reset
     '&bootloader': Boot
@@ -48,4 +58,4 @@ parse_config:
 draw_config:
   dark_mode: auto
   glyph_tap_size: 18
-  footer_text: 'LisM KEYMAPS | Created with keymap-drawer' 
+  footer_text: 'LisM KEYMAPS | Created with keymap-drawer'
