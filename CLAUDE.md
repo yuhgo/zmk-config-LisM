@@ -6,6 +6,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 LisMキーボードのZMKファームウェア設定リポジトリ。Dev Container環境でローカルビルドを実行し、トラックボール有無・左右・ZMK Studio対応など複数バリエーションのファームウェアを生成します。
 
+## リポジトリ管理
+
+このリポジトリは4mplelabのリポジトリをフォークして管理しています。
+
+### リモート設定
+
+- **`origin`**: https://github.com/yuhgo/zmk-config-LisM.git（自分のリポジトリ）
+- **`upstream`**: https://github.com/4mplelab/zmk-config-LisM.git（元のリポジトリ）
+
+### 通常の作業フロー
+
+```bash
+# 自分のリポジトリにプッシュ
+git push origin main
+
+# 元のリポジトリから最新の変更を取得
+git fetch upstream
+git merge upstream/main  # または git rebase upstream/main
+```
+
+### 元のリポジトリの更新を追跡する場合
+
+```bash
+# upstreamの変更を確認
+git fetch upstream
+
+# upstreamの変更をマージ
+git merge upstream/main
+```
+
 ## ビルドコマンド
 
 ### 基本ビルド
