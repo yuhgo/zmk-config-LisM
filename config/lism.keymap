@@ -58,7 +58,7 @@
 
         en {
             bindings = <&kp LANG2>;
-            key-positions = <23 22>;
+            key-positions = <21 22>;
         };
 
         ja {
