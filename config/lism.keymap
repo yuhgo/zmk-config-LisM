@@ -30,11 +30,6 @@
             key-positions = <1 2>;
         };
 
-        shift-z {
-            bindings = <&kp LS(Z)>;
-            key-positions = <22 23>;
-        };
-
         to_window_layer {
             bindings = <&mo 7>;
             key-positions = <6 7 8>;
@@ -57,7 +52,7 @@
 
         slash {
             bindings = <&kp SLASH>;
-            key-positions = <18 19>;
+            key-positions = <16 17>;
         };
 
         en {
@@ -67,7 +62,7 @@
 
         ja {
             bindings = <&kp LANG1>;
-            key-positions = <26 27>;
+            key-positions = <27 28>;
         };
     };
 
@@ -159,7 +154,7 @@
             bindings = <
 &kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
 &mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
-&mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt SLASH RIGHT_SHIFT
+&mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
 &kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &trans     &trans     &kp TAB
             >;
 
@@ -180,19 +175,19 @@
             status = "reserved";
             display-name = "Arrow Layer";
             bindings = <
-    &trans          &trans      &trans      &trans      &trans        &trans      &trans      &trans      &trans      &trans
-    &kp LG(LEFT)    &trans      &trans      &kp LG(RIGHT)   &trans      &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT   &trans
-    &trans          &trans      &trans      &trans      &trans        &trans      &trans      &trans      &trans      &trans
-    &kp LCTRL       &kp LEFT_ALT &kp LEFT_WIN &trans      &trans        &trans      &trans      &trans      &trans      &trans      &trans      &trans
+&trans        &trans        &trans        &trans         &trans                    &trans    &trans    &trans  &trans     &trans
+&kp LG(LEFT)  &trans        &trans        &kp LG(RIGHT)  &trans                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans
+&trans        &trans        &trans        &trans         &trans                    &trans    &trans    &trans  &trans     &trans
+&kp LCTRL     &kp LEFT_ALT  &kp LEFT_WIN  &trans         &trans  &trans    &trans  &trans    &trans    &trans  &trans     &trans
             >;
         };
 
         layer_3 {
             display-name = "Function Number Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &kp LCTRL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
@@ -200,9 +195,9 @@
         layer_4 {
             display-name = "Mouse Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mkp LCLK  &mkp RCLK  &trans
+&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &mkp LCLK  &mkp RCLK  &trans
 &trans  &trans  &trans  &trans  &trans  &lt 5 LANG1    &trans  &trans  &trans  &trans     &trans     &trans
             >;
         };
@@ -221,9 +216,9 @@
             status = "reserved";
             display-name = "Scroll Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &kp LCTRL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
