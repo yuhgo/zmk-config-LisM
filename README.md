@@ -19,7 +19,7 @@
 
 ## ローカルビルド手順
 
-GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカル環境では約30秒で完了します。  
+GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカル環境では約30秒で完了します。
 キーマップの変更など、少し試したいだけでも時間がかかるActionsに比べ、ローカルビルドなら素早く試行錯誤ができます。
 
 ### 必要なもの
@@ -28,14 +28,14 @@ GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカ�
 - VS Code拡張機能: [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 ### 手順
-1.  **準備**  
+1.  **準備**
     1.  このリポジトリをPCにcloneします。
     2.  Docker Desktopを起動します。
     3.  VS Codeでこのフォルダを開きます。
-    4.  右下に表示される「Reopen in Container(コンテナーで再度開く)」ボタンをクリックします。  
+    4.  右下に表示される「Reopen in Container(コンテナーで再度開く)」ボタンをクリックします。
         (初回は環境構築に時間がかかります)
 
-2.  **ビルド（ファームウェア作成）**  
+2.  **ビルド（ファームウェア作成）**
     VS Codeのターミナルで、以下のいずれかのコマンドを実行します。
 
     - **すべてのファームウェアを一度に作成する場合(ZMK Studioサポートなし):**
@@ -53,7 +53,7 @@ GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカ�
       ```bash
       make single
       ```
-      表示されたリストから、作成したいファームウェアの番号を入力してEnterキーを押します。  
+      表示されたリストから、作成したいファームウェアの番号を入力してEnterキーを押します。
       (キーマップ変更のみであれば、lism_right_xxxxのみでOKです)
 
     - **作成されたファームウェアを全削除:**
@@ -61,28 +61,28 @@ GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカ�
       make clean
       ```
 
-3.  **完成**  
-    ビルドが完了すると、`firmware_builds` フォルダの中に `.uf2` ファイルが作成されます。  
+3.  **完成**
+    ビルドが完了すると、`firmware_builds` フォルダの中に `.uf2` ファイルが作成されます。
     このファイルをキーボードに書き込むことで、ファームウェアが更新されます。
 
 ### 更新方法
 
 この設定ファイル（リポジトリ）や、キーボードファームウェアのコア部分であるZMK等が更新された場合の手順です。
 
-1.  **最新版の取得**  
+1.  **最新版の取得**
     VS Codeのターミナルで、以下のコマンドを実行して設定ファイルを最新の状態にします。
     ```bash
     git pull
     ```
 
-2.  **依存関係の更新**  
+2.  **依存関係の更新**
     続けて、以下のコマンドを実行して、ファームウェアのコア部分を更新します。
     ```bash
     make setup-west
     ```
     *(内部で `west update` が実行され、必要なファイルが更新されます)*
 
-3.  **ビルド**  
+3.  **ビルド**
     更新が完了したら、上記「ビルド（ファームウェア作成）」の手順でファームウェアを再作成してください。
 
 <br>
@@ -91,7 +91,7 @@ GitHub Actionsでのビルドは毎回2分前後かかりますが、ローカ�
 <summary>技術的な詳細情報</summary>
 
 ### 概要
-このリポジトリは、ZMKユーザー設定のローカルビルド環境を提供します。  
+このリポジトリは、ZMKユーザー設定のローカルビルド環境を提供します。
 GitHub Actionsの`build-user-config.yml`に近いフローをVS Code Devcontainer上で再現し、依存取得物はリポジトリ直下の`_west`（Git管理外）にまとめ、ビルド成果物は`firmware_builds`に集約します。
 
 ### 前提
@@ -119,7 +119,7 @@ GitHub Actionsの`build-user-config.yml`に近いフローをVS Code Devcontaine
   - `firmware_builds/` に `*.uf2`（優先）または `*.bin` をコピー
 
 ### セットアップについて
-Devcontainer起動時に`postCreateCommand`により自動でセットアップが行われます。  
+Devcontainer起動時に`postCreateCommand`により自動でセットアップが行われます。
 手動でセットアップを実行する場合は、以下のコマンドを使用します。
 ```bash
 make setup-west
@@ -144,8 +144,15 @@ make setup-west
 
 ### トラブルシューティング
 - **`west not found` / `yq not found`**
-  - コマンドはDevcontainer内で実行する必要があります。  
+  - コマンドはDevcontainer内で実行する必要があります。
     `west`はベースイメージに、`yq`はDockerfileでインストールされます。
+- **`Failed to reopen folder in container` / `docker info` エラー**
+  - Dockerデーモンが起動していない可能性があります。
+    1. Docker Desktopアプリケーションが起動しているか確認してください。
+    2. メニューバーのDockerアイコンを確認し、緑色（実行中）になっているか確認してください。
+    3. ターミナルで `docker info` を実行し、「Server:」セクションに情報が表示されるか確認してください。
+    4. Docker Desktopが起動していない場合は、アプリケーションから起動してください。
+    5. 起動後、数秒待ってから再度「Reopen in Container」を試してください。
 - **`No firmware found`**
   - `west build`のログと`BUILD_DIR/zephyr`内を確認してください。
     `shield`や`overlay-path`の指定に誤りがないか確認が必要です。
