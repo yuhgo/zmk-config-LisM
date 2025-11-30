@@ -205,10 +205,10 @@
         layer_5 {
             display-name = "Util Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans     &trans    &trans    &trans  &trans                    &trans              &trans        &trans            &trans         &trans
+&kp LCTRL  &trans    &trans    &trans  &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
+&kp LSHFT  &trans    &trans    &trans  &trans                    &trans              &trans        &mkp LCLK         &mkp RCLK      &trans
+&kp LCTRL  &kp LALT  &kp LGUI  &trans  &trans  &trans    &trans  &trans              &trans        &trans            &trans         &trans
             >;
         };
 
