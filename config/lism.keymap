@@ -11,11 +11,6 @@
 
 &mmv { time-to-max-speed-ms = <40>; };
 
-&msc { time-to-max-speed-ms = <40>; };
-
-&lt {
-};
-
 / {
     combos {
         compatible = "zmk,combos";
@@ -188,7 +183,7 @@
 &kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
 &mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &trans     &trans     &kp TAB
+&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &mac_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
