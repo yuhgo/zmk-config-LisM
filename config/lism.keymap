@@ -205,7 +205,6 @@
         };
 
         arrow_layer {
-            status = "reserved";
             display-name = "Arrow Layer";
             bindings = <
 &trans        &trans        &trans        &trans         &trans                    &trans    &trans    &trans  &trans     &trans
