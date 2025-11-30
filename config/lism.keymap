@@ -31,7 +31,7 @@
         };
 
         to_window_layer {
-            bindings = <&mo 7>;
+            bindings = <&mo 0>;
             key-positions = <6 7 8>;
         };
 
@@ -161,7 +161,7 @@
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
         };
 
-        layer_1 {
+        mark_layer {
             display-name = "Mark Layer";
             bindings = <
 &kp SQT         &kp DOUBLE_QUOTES  &kp EXCLAMATION  &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS                    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp PLUS      &kp AMPERSAND         &kp PERCENT
@@ -171,7 +171,7 @@
             >;
         };
 
-        layer_2 {
+        arrow_layer {
             status = "reserved";
             display-name = "Arrow Layer";
             bindings = <
@@ -182,7 +182,7 @@
             >;
         };
 
-        layer_3 {
+        function_number_layer {
             display-name = "Function Number Layer";
             bindings = <
 &trans     &kp F7        &kp F8        &kp F9  &kp F10                       &trans   &kp N7  &kp N8  &kp N9  &trans
@@ -192,18 +192,18 @@
             >;
         };
 
-        layer_4 {
+        mouse_layer {
             display-name = "Mouse Layer";
             bindings = <
 &trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
 &trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
 &trans  &trans  &trans  &trans  &trans                         &trans  &trans  &mkp LCLK  &mkp RCLK  &trans
-&trans  &trans  &trans  &trans  &trans  &lt 5 LANG1    &trans  &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &lt 7 LANG1    &trans  &trans  &trans  &trans     &trans     &trans
             >;
         };
 
-        layer_5 {
-            display-name = "Util Layer";
+        scroll_layer {
+            display-name = "Scroll Layer";
             bindings = <
 &trans     &trans    &trans    &trans  &trans                    &trans              &trans        &trans            &trans         &trans
 &kp LCTRL  &trans    &trans    &trans  &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
@@ -212,9 +212,9 @@
             >;
         };
 
-        layer_6 {
+        util_layer {
             status = "reserved";
-            display-name = "Scroll Layer";
+            display-name = "Util Layer";
             bindings = <
 &trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans     &trans        &trans        &trans  &trans                    &trans  &trans  &trans  &trans  &trans
@@ -223,7 +223,7 @@
             >;
         };
 
-        layer_7 {
+        window_layer {
             status = "reserved";
             display-name = "Window Layer";
             bindings = <
