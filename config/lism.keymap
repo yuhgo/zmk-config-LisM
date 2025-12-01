@@ -240,7 +240,6 @@
         };
 
         util_layer {
-            status = "reserved";
             display-name = "Util Layer";
             bindings = <
 &trans     &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt BT_SEL 0        &bt BT_SEL 1        &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
@@ -251,7 +250,6 @@
         };
 
         window_layer {
-            status = "reserved";
             display-name = "Window Layer";
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
