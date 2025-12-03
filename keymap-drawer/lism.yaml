@@ -367,7 +367,7 @@ layers:
   - Sft+6
   - LEFT SHIFT
   - {t: ▽, type: trans}
-  - QUOTE
+  - SQT
   - ','
   - '-'
   - Sft+-
@@ -384,7 +384,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - Sft+QUOTE
+  - Sft+SQT
   - '='
   - Sft+LBKT
   Windows Arrow Layer:
