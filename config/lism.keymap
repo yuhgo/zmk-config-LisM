@@ -289,18 +289,18 @@
             display-name = "Util Layer";
             bindings = <
 &studio_unlock  &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
-&trans     &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
-&trans     &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
-&kp LCTRL  &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
+&trans          &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
+&trans          &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
+&kp LCTRL       &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
             >;
         };
 
         win_default_layer {
             display-name = "Windows Default Layer";
             bindings = <
-&kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y        &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
-&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
+&kp Q             &kp W         &kp E          &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
+&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
+&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
 &kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 8 SPACE  &lt 9 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
@@ -310,20 +310,20 @@
         win_mark_layer {
             display-name = "Windows Mark Layer";
             bindings = <
-&kp LS(N7)      &kp LS(N2)    &kp EXCLAMATION  &kp RBKT              &kp LS(N8)                              &kp LS(N9)             &kp BSLH               &kp LS(SEMI)  &kp LS(N6)     &kp PERCENT
-&kp LBKT        &kp SEMICOLON &kp DOLLAR       &trans                &trans                                  &kp HASH               &kp SLASH              &kp LS(INT1)  &kp INT1       &kp LS(N6)
-&kp LEFT_SHIFT  &trans        &kp SQT         &kp COMMA             &kp MINUS                               &kp LS(MINUS)          &kp PERIOD             &kp MINUS     &trans         &trans
-&trans          &trans        &trans           &trans                &trans                &trans    &trans  &trans                 &trans                 &kp LS(SQT)   &kp EQUAL      &kp LS(LBKT)
+&kp LS(N7)      &kp LS(N2)     &kp EXCLAMATION  &kp RBKT   &kp LS(N8)                    &kp LS(N9)     &kp BSLH    &kp LS(SEMI)  &kp LS(N6)  &kp PERCENT
+&kp LBKT        &kp SEMICOLON  &kp DOLLAR       &trans     &trans                        &kp HASH       &kp SLASH   &kp LS(INT1)  &kp INT1    &kp LS(N6)
+&kp LEFT_SHIFT  &trans         &kp SQT          &kp COMMA  &kp MINUS                     &kp LS(MINUS)  &kp PERIOD  &kp MINUS     &trans      &trans
+&trans          &trans         &trans           &trans     &trans      &trans    &trans  &trans         &trans      &kp LS(SQT)   &kp EQUAL   &kp LS(LBKT)
             >;
         };
 
         win_arrow_layer {
             display-name = "Windows Arrow Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans    &trans  &trans  &trans   &trans                    &trans    &trans          &trans        &trans     &trans
+&kp HOME  &trans  &trans  &kp END  &trans                    &kp LEFT  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &trans
+&trans    &trans  &trans  &trans   &trans                    &trans    &trans          &trans        &trans     &trans
+&trans    &trans  &trans  &trans   &trans  &trans    &trans  &trans    &trans          &trans        &trans     &trans
             >;
         };
 
