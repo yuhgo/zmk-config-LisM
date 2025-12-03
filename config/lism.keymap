@@ -15,6 +15,10 @@
 #define SCROLL_LAYER 5
 #define UTIL_LAYER 6
 #define WINDOW_LAYER 7
+#define WIN_DEFAULT_LAYER 8
+#define WIN_MARK_LAYER 9
+#define WIN_ARROW_LAYER 10
+#define WIN_FUNCTION_NUMBER_LAYER 11
 
 &mt { flavor = "balanced"; };
 
@@ -132,6 +136,25 @@
             bindings = <&kp LG(RIGHT)>;
             label = "BROWSER_NEXT";
         };
+
+        bt_mac: bt_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&toggle_off WIN_DEFAULT_LAYER>,
+                       <&macro_wait_time 100>,
+                       <&bt BT_SEL 0>;
+            label = "BT_MAC";
+        };
+
+        bt_win: bt_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&toggle_off WIN_DEFAULT_LAYER>,
+                       <&macro_wait_time 100>,
+                       <&bt BT_SEL 1>,
+                       <&toggle_on WIN_DEFAULT_LAYER>;
+            label = "BT_WIN";
+        };
     };
 
     behaviors {
@@ -180,6 +203,19 @@
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp TAB>, <&kp ENTER>;
+        };
+
+        toggle_on: toggle_layer_on {
+            compatible = "zmk,behavior-toggle-layer";
+            #binding-cells = <1>;
+            display-name = "Toggle Layer On";
+        };
+
+        toggle_off: toggle_layer_off {
+            compatible = "zmk,behavior-toggle-layer";
+            #binding-cells = <1>;
+            display-name = "Toggle Layer Off";
+            toggle-mode = "off";
         };
     };
 
@@ -251,7 +287,7 @@
         util_layer {
             display-name = "Util Layer";
             bindings = <
-&trans     &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt BT_SEL 0        &bt BT_SEL 1        &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
+&trans     &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
 &trans     &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
 &trans     &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
 &kp LCTRL  &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
@@ -260,6 +296,48 @@
 
         window_layer {
             display-name = "Window Layer";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        win_default_layer {
+            display-name = "Windows Default Layer";
+            bindings = <
+&kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
+&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt ARROW_LAYER L    &kp RETURN
+&mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
+&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt MARK_LAYER LANG2  &lt ARROW_LAYER SPACE  &lt FUNCTION_NUMBER_LAYER DELETE    &kp BACKSPACE  &lt UTIL_LAYER LANG1  &trans  &mac_p     &master_p  &kp TAB
+            >;
+
+            sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
+        };
+
+        win_mark_layer {
+            display-name = "Windows Mark Layer";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        win_arrow_layer {
+            display-name = "Windows Arrow Layer";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        win_function_number_layer {
+            display-name = "Windows Function Number Layer";
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
