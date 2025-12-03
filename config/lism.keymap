@@ -312,8 +312,8 @@
             bindings = <
 &kp LS(N7)      &kp LS(N2)    &kp EXCLAMATION  &kp RBKT              &kp LS(N8)                              &kp LS(N9)             &kp BSLH               &kp LS(SEMI)  &kp LS(N6)     &kp PERCENT
 &kp LBKT        &kp SEMICOLON &kp DOLLAR       &trans                &trans                                  &kp HASH               &kp SLASH              &kp LS(INT1)  &kp INT1       &kp LS(N6)
-&kp LEFT_SHIFT  &trans        &kp QUOTE        &kp COMMA             &kp MINUS                               &kp LS(MINUS)          &kp PERIOD             &kp MINUS     &trans         &trans
-&trans          &trans        &trans           &trans                &trans                &trans    &trans  &trans                 &trans                 &kp LS(QUOTE) &kp EQUAL      &kp LS(LBKT)
+&kp LEFT_SHIFT  &trans        &kp SQT         &kp COMMA             &kp MINUS                               &kp LS(MINUS)          &kp PERIOD             &kp MINUS     &trans         &trans
+&trans          &trans        &trans           &trans                &trans                &trans    &trans  &trans                 &trans                 &kp LS(SQT)   &kp EQUAL      &kp LS(LBKT)
             >;
         };
 
