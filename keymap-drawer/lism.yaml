@@ -259,7 +259,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   Util Layer:
-  - {t: ▽, type: trans}
+  - '&studio_unlock'
   - BRIGHTNESS DEC
   - {t: ▽, type: trans}
   - BRIGHTNESS INC
