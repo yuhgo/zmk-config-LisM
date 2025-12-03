@@ -7,9 +7,9 @@ layers:
   - R
   - T
   - Y
-  - {t: U, type: held}
-  - {t: I, type: held}
-  - {t: O, type: held}
+  - U
+  - I
+  - O
   - P
   - {t: A, h: LCTRL}
   - S
@@ -478,8 +478,6 @@ combos:
   k: TAB
 - p: [1, 2]
   k: Sft+TAB
-- p: [6, 7, 8]
-  k: Default Layer
 - p: [2, 3]
   k: '-'
 - p: [6, 7]

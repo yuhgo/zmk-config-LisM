@@ -162,17 +162,17 @@ path.combo { stroke: #7f7f7f; }
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
 <text x="0" y="0" class="key tap">Y</text>
 </g>
-<g transform="translate(532, 28)" class="key held keypos-6">
-<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key held"/>
-<text x="0" y="0" class="key held tap">U</text>
+<g transform="translate(532, 28)" class="key keypos-6">
+<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
+<text x="0" y="0" class="key tap">U</text>
 </g>
-<g transform="translate(588, 28)" class="key held keypos-7">
-<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key held"/>
-<text x="0" y="0" class="key held tap">I</text>
+<g transform="translate(588, 28)" class="key keypos-7">
+<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
+<text x="0" y="0" class="key tap">I</text>
 </g>
-<g transform="translate(644, 28)" class="key held keypos-8">
-<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key held"/>
-<text x="0" y="0" class="key held tap">O</text>
+<g transform="translate(644, 28)" class="key keypos-8">
+<rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
+<text x="0" y="0" class="key tap">O</text>
 </g>
 <g transform="translate(700, 28)" class="key keypos-9">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
@@ -335,35 +335,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -550,35 +541,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -768,35 +750,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -985,35 +958,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -1203,35 +1167,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -1425,35 +1380,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -1663,35 +1609,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -1897,35 +1834,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -2110,35 +2038,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -2323,35 +2242,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
@@ -2536,35 +2446,26 @@ path.combo { stroke: #7f7f7f; }
 <text x="112" y="28" class="combo tap">Sft+TAB</text>
 </g>
 <g class="combo combopos-2">
-<path d="M588,28 l-37,0" class="combo"/>
-<path d="M588,28 l37,0" class="combo"/>
-<rect rx="6" ry="6" x="574" y="15" width="28" height="26" class="combo"/>
-<a href="#Default-Layer">
-<text x="588" y="28" class="combo tap layer-activator">
-<tspan x="588" dy="-0.6em">Default</tspan><tspan x="588" dy="1.2em">Layer</tspan>
-</text>
-</a></g>
-<g class="combo combopos-3">
 <rect rx="6" ry="6" x="154" y="15" width="28" height="26" class="combo"/>
 <text x="168" y="28" class="combo tap">-</text>
 </g>
-<g class="combo combopos-4">
+<g class="combo combopos-3">
 <rect rx="6" ry="6" x="546" y="15" width="28" height="26" class="combo"/>
 <text x="560" y="28" class="combo tap">+</text>
 </g>
-<g class="combo combopos-5">
+<g class="combo combopos-4">
 <rect rx="6" ry="6" x="154" y="71" width="28" height="26" class="combo"/>
 <text x="168" y="84" class="combo tap">*</text>
 </g>
-<g class="combo combopos-6">
+<g class="combo combopos-5">
 <rect rx="6" ry="6" x="546" y="71" width="28" height="26" class="combo"/>
 <text x="560" y="84" class="combo tap">/</text>
 </g>
-<g class="combo combopos-7">
+<g class="combo combopos-6">
 <rect rx="6" ry="6" x="98" y="127" width="28" height="26" class="combo"/>
 <text x="112" y="140" class="combo tap">LANG2</text>
 </g>
-<g class="combo combopos-8">
+<g class="combo combopos-7">
 <rect rx="6" ry="6" x="602" y="127" width="28" height="26" class="combo"/>
 <text x="616" y="140" class="combo tap">LANG1</text>
 </g>
