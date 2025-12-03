@@ -39,7 +39,7 @@
         };
 
         to_window_layer {
-            bindings = <&mo DEFAULT_LAYER>;
+            bindings = <&mo 0>;
             key-positions = <6 7 8>;
         };
 
@@ -91,7 +91,7 @@
         to_layer_0: to_layer_0 {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            bindings = <&to DEFAULT_LAYER &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
         };
 
@@ -140,20 +140,27 @@
         bt_mac: bt_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&toggle_off WIN_DEFAULT_LAYER>,
-                       <&macro_wait_time 100>,
-                       <&bt BT_SEL 0>;
+            bindings = <&toggle_off 7>, <&macro_wait_time 100>, <&bt BT_SEL 0>;
+
             label = "BT_MAC";
         };
 
         bt_win: bt_win {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&toggle_off WIN_DEFAULT_LAYER>,
-                       <&macro_wait_time 100>,
-                       <&bt BT_SEL 1>,
-                       <&toggle_on WIN_DEFAULT_LAYER>;
+            bindings =
+                <&toggle_off 7>,
+                <&macro_wait_time 100>,
+                <&bt BT_SEL 1 &toggle_on 7>;
+
             label = "BT_WIN";
+        };
+
+        win_p: win_p {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp J &kp F &kp J &kp F &kp H &kp G &kp H &kp G &kp H &kp MINUS &kp N0 &kp N9 &kp N0 &kp N9>;
+            label = "WIN_P";
         };
     };
 
@@ -194,7 +201,7 @@
             label = "LAYER3_BACKSPACE_TD";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo FUNCTION_NUMBER_LAYER>, <&kp BACKSPACE>;
+            bindings = <&mo 3>, <&kp BACKSPACE>;
         };
 
         tab_enter_td: tab_enter_td {
@@ -226,9 +233,9 @@
             display-name = "Default Layer";
             bindings = <
 &kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt ARROW_LAYER L    &kp RETURN
+&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt MARK_LAYER LANG2  &lt ARROW_LAYER SPACE  &lt FUNCTION_NUMBER_LAYER DELETE    &kp BACKSPACE  &lt UTIL_LAYER LANG1  &trans  &mac_p     &master_p  &kp TAB
+&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &mac_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
@@ -267,10 +274,10 @@
         mouse_layer {
             display-name = "Mouse Layer";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
-&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans     &trans     &trans
-&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &mkp LCLK  &mkp RCLK  &trans
-&trans  &trans  &trans  &trans  &trans  &lt WINDOW_LAYER LANG1    &trans  &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mkp LCLK  &mkp RCLK  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans     &trans     &trans
             >;
         };
 
@@ -294,23 +301,13 @@
             >;
         };
 
-        window_layer {
-            display-name = "Window Layer";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
         win_default_layer {
             display-name = "Windows Default Layer";
             bindings = <
-&kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt ARROW_LAYER L    &kp RETURN
-&mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt MARK_LAYER LANG2  &lt ARROW_LAYER SPACE  &lt FUNCTION_NUMBER_LAYER DELETE    &kp BACKSPACE  &lt UTIL_LAYER LANG1  &trans  &mac_p     &master_p  &kp TAB
+&kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y        &kp U   &kp I      &kp O      &kp P
+&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
+&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
+&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
