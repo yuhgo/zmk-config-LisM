@@ -14,7 +14,6 @@
 #define MOUSE_LAYER 4
 #define SCROLL_LAYER 5
 #define UTIL_LAYER 6
-#define WINDOW_LAYER 7
 #define WIN_DEFAULT_LAYER 8
 #define WIN_MARK_LAYER 9
 #define WIN_ARROW_LAYER 10
@@ -36,11 +35,6 @@
         shift_tab {
             bindings = <&kp LS(TAB)>;
             key-positions = <1 2>;
-        };
-
-        to_window_layer {
-            bindings = <&mo 0>;
-            key-positions = <6 7 8>;
         };
 
         minus {
