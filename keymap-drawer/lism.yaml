@@ -345,34 +345,34 @@ layers:
   - '&master_p'
   - TAB
   Windows Mark Layer:
+  - Sft+7
+  - Sft+2
+  - '!'
+  - RBKT
+  - Sft+8
+  - Sft+9
+  - BSLH
+  - Sft+SEMI
+  - Sft+6
+  - '%'
+  - LBKT
+  - ;
+  - $
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - '#'
+  - /
+  - Sft+INT3
+  - INT3
+  - Sft+6
+  - LEFT SHIFT
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ':'
+  - ','
+  - '-'
+  - Sft+-
+  - PERIOD
+  - '-'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -384,9 +384,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - 'Sft+:'
+  - '='
+  - Sft+LBKT
   Windows Arrow Layer:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
