@@ -14,10 +14,10 @@
 #define MOUSE_LAYER 4
 #define SCROLL_LAYER 5
 #define UTIL_LAYER 6
-#define WIN_DEFAULT_LAYER 8
-#define WIN_MARK_LAYER 9
-#define WIN_ARROW_LAYER 10
-#define WIN_FUNCTION_NUMBER_LAYER 11
+#define WIN_DEFAULT_LAYER 7
+#define WIN_MARK_LAYER 8
+#define WIN_ARROW_LAYER 9
+#define WIN_FUNCTION_NUMBER_LAYER 10
 
 &mt { flavor = "balanced"; };
 
@@ -301,7 +301,7 @@
 &kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y        &kp U   &kp I      &kp O      &kp P
 &mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
+&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 8 SPACE  &lt 9 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
