@@ -26,6 +26,7 @@
 / {
     combos {
         compatible = "zmk,combos";
+        layers = <0 1 2 3 4 5 6 7 8 9 10>;
 
         tab {
             bindings = <&kp TAB>;
@@ -153,7 +154,7 @@
         win_p: win_p {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp J &kp F &kp J &kp F &kp H &kp G &kp H &kp G &kp H &kp MINUS &kp N0 &kp N9 &kp N0 &kp N9>;
+            bindings = <&kp J &kp F &kp J &kp F &kp H &kp G &kp H &kp G &kp MINUS &kp N0 &kp N9 &kp N0 &kp N9>;
             label = "WIN_P";
         };
     };
@@ -301,7 +302,7 @@
 &kp Q             &kp W         &kp E          &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
 &mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 8 SPACE  &lt 9 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
+&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
