@@ -336,8 +336,8 @@ layers:
   - LEFT ALT
   - {t: ESC, h: LCTRL}
   - {t: LANG2, h: Windows Mark Layer}
-  - {t: SPACE, h: Windows Mark Layer}
-  - {t: DEL, h: Windows Arrow Layer}
+  - {t: SPACE, h: Windows Arrow Layer}
+  - {t: DEL, h: Windows Function Number Layer}
   - BS
   - {t: LANG1, h: Util Layer}
   - {t: ▽, type: trans}
@@ -422,8 +422,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {type: held}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -466,7 +466,7 @@ layers:
   - LCTRL
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {type: held}
   - Sft+-
   - .
   - {t: ▽, type: trans}
