@@ -142,6 +142,69 @@ make setup-west
 - `zephyr-tools.zephyr-ide`: Zephyr IDE
 - `spadin.zmk-tools`: ZMKツール（`.keymap` のシンタックスハイライト等）
 
+### Dev Container CLI（VS Code以外での使用）
+
+VS Code以外の環境でDev Containerを使用する場合は、Dev Container CLIを使用します。
+このプロジェクトではmiseを使ってNode.jsと`@devcontainers/cli`を管理しています。
+
+**前提条件**:
+- Docker がインストールされていること
+- mise がインストールされていること
+
+**セットアップ手順**:
+```bash
+# 1. miseでこのディレクトリの設定を信頼
+mise trust
+
+# 2. Node.jsをインストール
+mise install
+
+# 3. @devcontainers/cli をインストール
+mise run devcontainer-install
+```
+
+**コンテナの操作**:
+```bash
+# コンテナを起動
+mise run dc-up
+
+# コンテナ内でシェルを開く
+mise run dc-shell
+
+# コンテナ内でコマンドを実行（例：make）
+mise run dc-exec make
+
+# 全ファームウェアビルド
+mise run dc-exec make all
+
+# 単体ビルド（対話選択）
+mise run dc-exec make single
+```
+
+**直接devcontainerコマンドを使用する場合**:
+```bash
+# コンテナを起動
+devcontainer up --workspace-folder .
+
+# コンテナ内でコマンドを実行
+devcontainer exec --workspace-folder . make
+
+# コンテナ内でシェルを開く
+devcontainer exec --workspace-folder . /bin/bash
+```
+
+**コンテナの停止・削除**:
+```bash
+# 実行中のコンテナを確認
+docker ps
+
+# コンテナを停止
+docker stop <コンテナ名またはID>
+
+# コンテナを削除
+docker rm <コンテナ名またはID>
+```
+
 ## キーマップ編集ワークフロー
 
 1. **キーマップ変更**: `config/lism.keymap` を編集

@@ -1,0 +1,18 @@
+[tools]
+node = "lts"
+
+[tasks.devcontainer-install]
+description = "Install @devcontainers/cli"
+run = "npm install -g @devcontainers/cli"
+
+[tasks.dc-up]
+description = "Start dev container"
+run = "devcontainer up --workspace-folder ."
+
+[tasks.dc-shell]
+description = "Open shell in dev container"
+run = "devcontainer exec --workspace-folder . /bin/bash"
+
+[tasks.dc-exec]
+description = "Execute command in dev container"
+run = "devcontainer exec --workspace-folder . $@"
