@@ -339,7 +339,7 @@ layers:
   - {t: SPACE, h: Windows Arrow Layer}
   - {t: DEL, h: Windows Function Number Layer}
   - BS
-  - {t: LANG1, h: Util Layer}
+  - {t: LANG1, h: Windows Util Layer}
   - {t: ▽, type: trans}
   - '&win_p'
   - '&master_p'
@@ -473,6 +473,49 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  Windows Util Layer:
+  - '&studio_unlock'
+  - BRIGHTNESS DEC
+  - {t: ▽, type: trans}
+  - BRIGHTNESS INC
+  - {t: ▽, type: trans}
+  - '&bt_mac'
+  - '&bt_win'
+  - {t: BT, h: '2'}
+  - {t: BT, h: '3'}
+  - {t: BT, h: '4'}
+  - {t: ▽, type: trans}
+  - VOLUME DOWN
+  - MUTE
+  - VOLUME UP
+  - {t: ▽, type: trans}
+  - Ctl+LEFT ARROW
+  - Ctl+DOWN ARROW
+  - Ctl+UP ARROW
+  - Ctl+→
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - BT CLR
+  - LCTRL
+  - LEFT ALT
+  - LEFT WIN
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - BT CLR ALL
 combos:
 - p: [11, 12]
   k: TAB
