@@ -18,6 +18,7 @@
 #define WIN_MARK_LAYER 8
 #define WIN_ARROW_LAYER 9
 #define WIN_FUNCTION_NUMBER_LAYER 10
+#define WIN_UTIL_LAYER 11
 
 &mt { flavor = "balanced"; };
 
@@ -26,7 +27,7 @@
 / {
     combos {
         compatible = "zmk,combos";
-        layers = <0 1 2 3 4 5 6 7 8 9 10>;
+        layers = <0 1 2 3 4 5 6 7 8 9 10 11>;
 
         tab {
             bindings = <&kp TAB>;
@@ -302,7 +303,7 @@
 &kp Q             &kp W         &kp E          &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
 &mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
+&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 11 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
@@ -335,6 +336,16 @@
 &kp LCTRL  &kp F4        &kp F5        &kp F6  &kp F11                           &trans   &kp N4  &kp N5  &kp N6  &trans
 &kp LSHFT  &kp F1        &kp F2        &kp F3  &kp F12                           &kp N0   &kp N1  &kp N2  &kp N3  &trans
 &kp LEFT_WIN  &kp LEFT_ALT  &kp LCTRL  &trans  &trans   &trans    &kp LS(MINUS)  &kp DOT  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        win_util_layer {
+            display-name = "Windows Util Layer";
+            bindings = <
+&studio_unlock  &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
+&trans          &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
+&trans          &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
+&kp LCTRL       &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
             >;
         };
     };
