@@ -1,7 +1,15 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(mise run:*)"
-    ]
-  }
+	"permissions": {
+		"allow": [
+			"Read",
+			"Write",
+			"Edit",
+			"Glob",
+			"Grep",
+			"Bash(mise run:*)",
+			"WebFetch(domain:zmk.dev)",
+			"mcp__serena__*"
+		],
+		"deny": ["Read(**/.env*)", "Write(**/.env*)", "Edit(**/.env*)"]
+	}
 }
