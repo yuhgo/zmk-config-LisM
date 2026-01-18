@@ -243,7 +243,7 @@
 &kp SQT         &kp DOUBLE_QUOTES  &kp EXCLAMATION  &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS                    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp PLUS      &kp AMPERSAND  &kp PERCENT
 &kp AT_SIGN     &kp SEMICOLON      &kp DOLLAR       &trans            &trans                                  &kp HASH               &kp SLASH          &kp PIPE      &kp BACKSLASH  &kp AMPERSAND
 &kp LEFT_SHIFT  &trans             &kp COLON        &kp COMMA         &kp MINUS                               &kp EQUAL              &kp PERIOD         &kp MINUS     &trans         &trans
-&trans          &trans             &trans           &trans            &trans                &trans    &trans  &trans                 &trans             &kp ASTERISK  &kp CARET      &kp GRAVE
+&trans          &trans             &trans           &trans            &trans                &trans    &trans  &kp LG(SPACE)          &trans             &kp ASTERISK  &kp CARET      &kp GRAVE
             >;
         };
 
