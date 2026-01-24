@@ -363,7 +363,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -587,7 +587,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -812,7 +812,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -1036,7 +1036,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -1261,7 +1261,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -1490,7 +1490,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -1735,7 +1735,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -1976,7 +1976,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -2204,7 +2204,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -2428,7 +2428,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -2652,7 +2652,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
@@ -2897,7 +2897,7 @@ path.combo { stroke: #7f7f7f; }
 <path d="M364,28 l93,0" class="combo"/>
 <rect rx="6" ry="6" x="350" y="15" width="28" height="26" class="combo"/>
 <text x="364" y="28" class="combo tap">
-<tspan x="364" dy="-0.6em" style="font-size: 70%">Sft+Ctl</tspan><tspan x="364" dy="1.2em" style="font-size: 70%">+Gui+SPACE</tspan>
+<tspan x="364" dy="-0.6em">Hyper+</tspan><tspan x="364" dy="1.2em">SPACE</tspan>
 </text>
 </g>
 <g class="combo combopos-8">
