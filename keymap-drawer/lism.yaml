@@ -529,7 +529,9 @@ combos:
   k: '*'
 - p: [16, 17]
   k: /
-- p: [21, 22]
-  k: LANG2
-- p: [27, 28]
-  k: LANG1
+- p: [14, 15]
+  k: Sft+Ctl+Gui+SPACE
+- p: [4, 5]
+  k: Sft+Ctl+Gui+SPACE
+- p: [24, 25]
+  k: Sft+Gui+SPACE
