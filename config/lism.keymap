@@ -65,7 +65,7 @@
         };
 
         homerow-scroll {
-            bindings = <&kp LS(LC(LG(SPACE)))>;
+            bindings = <&kp LS(LC(LG(LA(SPACE))))>;
             key-positions = <4 5>;
         };
 
