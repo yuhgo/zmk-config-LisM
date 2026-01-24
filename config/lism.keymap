@@ -59,14 +59,19 @@
             key-positions = <16 17>;
         };
 
-        en {
-            bindings = <&kp LANG2>;
-            key-positions = <21 22>;
+        homerow-click {
+            bindings = <&kp LS(LC(LG(SPACE)))>;
+            key-positions = <14 15>;
         };
 
-        ja {
-            bindings = <&kp LANG1>;
-            key-positions = <27 28>;
+        homerow-scroll {
+            bindings = <&kp LS(LC(LG(SPACE)))>;
+            key-positions = <4 5>;
+        };
+
+        amical {
+            bindings = <&kp LS(LG(SPACE))>;
+            key-positions = <24 25>;
         };
     };
 
@@ -300,9 +305,9 @@
         win_default_layer {
             display-name = "Windows Default Layer";
             bindings = <
-&kp Q             &kp W         &kp E          &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
-&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
+&kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y         &kp U   &kp I      &kp O      &kp P
+&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H         &kp J   &kp K      &lt 2 L    &kp RETURN
+&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N         &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
 &kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 8 LANG2  &lt 9 SPACE  &lt 10 DELETE    &kp BACKSPACE  &lt 11 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
@@ -332,9 +337,9 @@
         win_function_number_layer {
             display-name = "Windows Function Number Layer";
             bindings = <
-&trans     &kp F7        &kp F8        &kp F9  &kp F10                           &trans   &kp N7  &kp N8  &kp N9  &trans
-&kp LCTRL  &kp F4        &kp F5        &kp F6  &kp F11                           &trans   &kp N4  &kp N5  &kp N6  &trans
-&kp LSHFT  &kp F1        &kp F2        &kp F3  &kp F12                           &kp N0   &kp N1  &kp N2  &kp N3  &trans
+&trans        &kp F7        &kp F8     &kp F9  &kp F10                           &trans   &kp N7  &kp N8  &kp N9  &trans
+&kp LCTRL     &kp F4        &kp F5     &kp F6  &kp F11                           &trans   &kp N4  &kp N5  &kp N6  &trans
+&kp LSHFT     &kp F1        &kp F2     &kp F3  &kp F12                           &kp N0   &kp N1  &kp N2  &kp N3  &trans
 &kp LEFT_WIN  &kp LEFT_ALT  &kp LCTRL  &trans  &trans   &trans    &kp LS(MINUS)  &kp DOT  &trans  &trans  &trans  &trans
             >;
         };
