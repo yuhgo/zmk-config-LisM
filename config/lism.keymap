@@ -320,7 +320,7 @@
 &kp LS(N7)      &kp LS(N2)     &kp EXCLAMATION  &kp RBKT   &kp LS(N8)                    &kp LS(N9)     &kp BSLH    &kp LS(SEMI)  &kp LS(N6)  &kp PERCENT
 &kp LBKT        &kp SEMICOLON  &kp DOLLAR       &trans     &trans                        &kp HASH       &kp SLASH   &kp LS(INT1)  &kp INT1    &kp LS(N6)
 &kp LEFT_SHIFT  &trans         &kp SQT          &kp COMMA  &kp MINUS                     &kp LS(MINUS)  &kp PERIOD  &kp MINUS     &trans      &trans
-&trans          &trans         &trans           &trans     &trans      &trans    &trans  &trans         &trans      &kp LS(SQT)   &kp EQUAL   &kp LS(LBKT)
+&trans          &trans         &trans           &trans     &trans      &trans    &trans  &kp LGUI      &trans      &kp LS(SQT)   &kp EQUAL   &kp LS(LBKT)
             >;
         };
 
@@ -348,7 +348,7 @@
             display-name = "Windows Util Layer";
             bindings = <
 &studio_unlock  &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
-&trans          &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
+&trans          &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp LG(LC(LEFT))    &kp RC(DOWN_ARROW)  &kp LG(TAB)       &kp LG(LC(RIGHT))  &trans
 &trans          &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
 &kp LCTRL       &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
             >;
