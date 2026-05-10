@@ -24,6 +24,7 @@ build/
 # Local build directories (west build -d)
 build/
 build-*/
+!.claude/skills/build-*/
 zephyr/.cache/
 zephyr/.zephyr/*
 .tmp/
