@@ -57,3 +57,6 @@ docker-compose.override.yml
 _west/
 firmware_builds/
 !CLAUDE.md
+
+# serena (auto-generated on session start, not used in this repo)
+.serena/

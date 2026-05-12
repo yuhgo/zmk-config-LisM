@@ -32,22 +32,30 @@
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| B.1 | Windows「設定 > 時刻と言語 > 言語と地域 > 日本語 > 言語のオプション > ハードウェア キーボード レイアウト」を **「英語キーボード (101/104 キー)」** に変更 | 設定画面で「英語キーボード」と表示される ~~| A.7 | cc:TODO（要ゆうご作業） |
-| B.2 | Windows にサインアウト / 再起動して設定を反映 | 反映後、LisM の `default_layer` で英字が出る | B.1 | cc:TODO（要ゆうご作業） |
+| B.1 | Windows のシステム言語設定 + Microsoft IME のキーボードレイアウトを **「英語キーボード (101/104 キー)」** に変更 | 設定画面で「英語キーボード」と表示される、かつ Win 接続時に LisM で記号が US 配列で出る | A.7 | cc:WIP（システム言語は US 変更済みだが、Win 11 の Microsoft IME UI に「ハードウェア キーボード レイアウト」項目が見当たらず詰まり） |
+| B.2 | Windows にサインアウト / 再起動して設定を反映 | 反映後、LisM の `default_layer` で英字が出る | B.1 | cc:WIP（B.1 待ち） |
 | B.3 | LisM で `mark_layer` K 位置（`&kp PIPE`）を押して Win でも `\|` が出ることを確認 | Win で `\|` が出る | B.2 | cc:TODO（要実機） |
 
-#### Phase C: keymap の共通化（win_*_layer の削除）
+> **B.1 の詰まりメモ (2026-05-13)**: Windows 11 の Microsoft IME UI から「ハードウェア キーボード レイアウト」項目が消えている。「以前のバージョンの Microsoft IME を使う」トグルを ON にしてサインアウト/インしても項目が出ない。検証で LisM の `mark_layer` W 位置押下時に `@` が出ることから、IME が依然 JIS として解釈している（W 位置の `&kp DOUBLE_QUOTES` = `Shift+'` が JIS で `@` を出すのと一致）。
+>
+> **次回検討する選択肢**:
+> 1. Google IME / Mozc UT / ATOK のいずれかをインストール（サードパーティ IME ならプロパティでキーボードレイアウト変更可能）
+> 2. レジストリ直接編集（`HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters` の `LayerDriver JPN=kbd101.dll` 等）
+> 3. Phase B を断念して `win_*_layer` を全部保持する方針にシフト。現状の Phase A ロールバック済みの状態で main にマージし、二重管理を継続。
+
+#### Phase C: keymap 共通化（win_mark / win_function だけ削除）
+
+**方針**: 修飾キー順序やデスクトップ移動関連の OS 差を保つため、`win_default_layer` / `win_arrow_layer` / `win_util_layer` は**保持**する。記号レイヤーと数字ファンクションレイヤーだけ Mac と共有する。
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| C.1 | `win_mark_layer` を削除し、`mark_layer` を共有 | keymap から `win_mark_layer` が消える | B.3 | cc:TODO |
-| C.2 | `win_arrow_layer` を削除し、`arrow_layer` を共有 | `win_arrow_layer` 削除 | C.1 | cc:TODO |
-| C.3 | `win_function_number_layer` を削除し、`function_number_layer` を共有 | `win_function_number_layer` 削除 | C.2 | cc:TODO |
-| C.4 | `win_util_layer` を削除し、`util_layer` を共有（Mac/Win 差分のキー＝Mission Control / 仮想デスクトップ系は別マクロ化を検討） | `win_util_layer` 削除、または Mac/Win 差分マクロ | C.3 | cc:TODO |
-| C.5 | `win_default_layer` を削除し、`default_layer` を共有 | `win_default_layer` 削除 | C.4 | cc:TODO |
-| C.6 | レイヤー番号を 0〜6 に詰める、`#define` を整理、`&lt` 参照を整理 | レイヤー数が減って keymap が短くなる | C.5 | cc:TODO |
-| C.7 | `bt_mac` / `bt_win` から `&toggle_off/on 7`（win_default_layer トグル）を削除 | 2 マクロは BT_SEL だけになる | C.6 | cc:TODO |
-| C.8 | `make all` 成功、Mac/Win 両方で実機動作確認 | 5 種ビルド成功、両 OS で動作 | C.7 | cc:TODO（要実機） |
+| C.1 | `#define WIN_MARK_LAYER 8` / `#define WIN_FUNCTION_NUMBER_LAYER 10` を削除（レイヤー番号も詰める） | `WIN_MARK_LAYER`, `WIN_FUNCTION_NUMBER_LAYER` が keymap から消える | B.3 | cc:TODO |
+| C.2 | `win_default_layer` の `&lt 8 LANG2` → `&lt 1 LANG2`、`&lt 10 DELETE` → `&lt 3 DELETE` に修正（共通の `mark_layer` / `function_number_layer` を参照） | win_default_layer が共有レイヤーを呼ぶ | C.1 | cc:TODO |
+| C.3 | `win_mark_layer` ブロックを削除 | keymap から `win_mark_layer` が消える | C.2 | cc:TODO |
+| C.4 | `win_function_number_layer` ブロックを削除 | keymap から `win_function_number_layer` が消える | C.3 | cc:TODO |
+| C.5 | 残った `win_arrow_layer` / `win_util_layer` のレイヤー番号 (現在 9, 11) を詰めて、対応する `&lt` 参照も修正 | レイヤー番号が連番、`&lt` 整合 | C.4 | cc:TODO |
+| C.6 | `combos` の `layers = <0 1 2 ... 11>` を新しい範囲に修正 | combos が正しいレイヤー範囲を指す | C.5 | cc:TODO |
+| C.7 | `make all` 成功、Mac/Win 両方で実機動作確認（特に記号レイヤーが Win でも動くこと） | 5 種ビルド成功、両 OS で動作 | C.6 | cc:TODO（要実機） |
 
 #### Phase D: クリーンアップ
 
