@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: 4mplelab
       url-base: https://github.com/4mplelab
+    - name: kot149
+      url-base: https://github.com/kot149
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -22,5 +24,8 @@ manifest:
     - name: zmk-feature-charge-indicator
       remote: 4mplelab
       revision: main
+    - name: zmk-layout-shift
+      remote: kot149
+      revision: v1
   self:
     path: config
