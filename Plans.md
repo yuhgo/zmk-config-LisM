@@ -8,59 +8,53 @@
 
 ## アクティブな計画
 
-### Win 記号レイヤーを Mac と共通化（zmk-layout-shift v2 再導入）
+### Win 側を US キーボード扱いにして keymap を Mac と共通化
 
-詳細: [docs/plan/layout-shift導入の引き継ぎ資料.md](docs/plan/layout-shift導入の引き継ぎ資料.md)
+詳細: [docs/plan/Win側USキーボード化に方針変更.md](docs/plan/Win側USキーボード化に方針変更.md)
 
-前回 (`feat/zmk-layout-shift-jis`) は ① 左右両方の conf に CONFIG を入れた、② `layout_shift_kp_override.dtsi` で `&kp` を一括上書きした、③ `PERSISTENT_STATE=y` のままだった、の 3 点が複合して split pairing 崩壊と Mission Control / Spaces 不動を招いた。今回は「central だけ」「`&kpls` 個別書き換え」「`PERSISTENT_STATE=n`」で再挑戦する。
+`feat/layout-shift-v2` で zmk-layout-shift v1 を導入し Phase 1〜3.1 まで進めたが、実機検証で **Win は LisM (BLE) を US キーボードとして認識している** ことが判明した。layout-shift の JIS HID コード (`LS(INT3)` 等) は Win に届いても期待された記号を出さないため、layout-shift 方式は採用不可。
 
-#### Phase 0: 準備
+新方針: **Win 側のハードウェアキーボードレイアウトを「英語キーボード (101/104 キー)」に変更** することで、Mac と Win で同じ keymap を共有する。
 
-| Task | 内容 | DoD | Depends | Status |
-|------|------|-----|---------|--------|
-| 0.1 | `feat/layout-shift-v2` ブランチを main から作成 | `git branch --show-current` が `feat/layout-shift-v2` | - | cc:完了 |
-| 0.2 | 現状の `make all` がクリーンに通り全 5 種 .uf2 が出ることを再確認（Studio 版は除外、Studio 含む 7 種が必要なら `make all_studio`） | `firmware_builds/` に 5 ファイル（左 ×2 + 右 ×2 + settings_reset） | 0.1 | cc:完了 |
-
-#### Phase 1: layout-shift モジュール組み込み（無効状態で導入）
+#### Phase A: layout-shift をロールバック
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| 1.1 | `config/west.yml` に `kot149/zmk-layout-shift v1` を追加（`zmk-driver-paw3222` と同じ並び） | west.yml diff が公式 README 通り、`make setup-west` 後 `_west/zmk-layout-shift/` が存在 | 0.2 | cc:完了 |
-| 1.2 | `config/lism_right.conf` に `CONFIG_LAYOUT_SHIFT=y` / `CONFIG_LAYOUT_SHIFT_TARGET_JIS=y` / `CONFIG_LAYOUT_SHIFT_PERSISTENT_STATE=n` を追加（**left.conf には何も追加しない**） | right.conf 差分のみ、left.conf 無変更 | 1.1 | cc:完了 |
-| 1.3 | `config/lism.keymap` の include に `<layout_shift.dtsi>` のみ追加（`layout_shift_kp_override.dtsi` は include しない） | keymap 差分が include 1 行追加のみ | 1.2 | cc:完了 |
-| 1.4 | `make all` が成功し、左右ペアリングと既存挙動に変化がないことを実機で確認（`&kpls` 未使用なので無効と等価） | 7 種ビルド成功＋実機で青 LED＋既存キー全部効く | 1.3 | cc:TODO（要実機） |
+| A.1 | `mark_layer` の検証用キーを元に戻す（K 位置 `&kp INT3` → `&kp PIPE`、J 位置 `&kpls SLASH` → `&kp SLASH`） | mark_layer に `&kpls` / `&kp INT3` が残らない | - | cc:完了 |
+| A.2 | `bt_mac` から `&tog_ls_off`、`bt_win` から `&tog_ls_on` を削除 | 2 マクロが Phase 0 状態に戻る | A.1 | cc:完了 |
+| A.3 | `config/lism.keymap` から `#include <layout_shift.dtsi>` を削除 | keymap diff が include 1 行削除のみ | A.2 | cc:完了 |
+| A.4 | `config/lism_right.conf` から `CONFIG_LAYOUT_SHIFT*` 3 行を削除 | right.conf が Phase 0 状態に戻る | A.3 | cc:完了 |
+| A.5 | `config/west.yml` から `kot149` remote / `zmk-layout-shift` project を削除 | west.yml diff が remote 2 行 + project 3 行削除 | A.4 | cc:完了 |
+| A.6 | `make setup-west` で workspace を再生成（`_west/zmk-layout-shift/` を west に消させる） | `_west/zmk-layout-shift/` が消えている（実際は west が stale ディレクトリとして残すが、ビルドには無影響） | A.5 | cc:完了（注釈: stale dir 残置） |
+| A.7 | `make all` 成功、Mac で実機動作確認（既存挙動が壊れていない） | 5 種ビルド成功、Mac で動作 | A.6 | cc:WIP（ビルド成功、実機動作確認は ゆうご さん側待ち） |
 
-#### Phase 2: プロファイル切替に layout-shift トグルを連動
-
-| Task | 内容 | DoD | Depends | Status |
-|------|------|-----|---------|--------|
-| 2.1 | `bt_mac` マクロ先頭に `&tog_ls_off`、`bt_win` マクロ先頭に `&tog_ls_on` を追加 | keymap diff が該当 2 マクロのみ | 1.4 | cc:TODO |
-| 2.2 | `make all` 成功＋実機で `bt_mac`/`bt_win` 切替が以前と同じく動くこと（記号はまだ未変更なので変化なしのはず） | プロファイル切替が壊れない | 2.1 | cc:TODO（要実機） |
-
-#### Phase 3: 段階的に `&kpls` 化（小さく試す）
+#### Phase B: Win 側を US キーボード設定に変更（ゆうご さん作業）
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| 3.1 | `mark_layer` の記号キーを 1〜2 個だけ `&kpls` に書き換え（修飾単体・Cmd+Space は `&kp` のまま） | 該当キーが Mac で従来通り出る | 2.2 | cc:TODO（要実機） |
-| 3.2 | 問題なければ `mark_layer` 全体の記号キーを `&kpls` 化 | mark_layer の記号が Mac で全部出る | 3.1 | cc:TODO（要実機） |
-| 3.3 | `combos` の `minus`/`plus`/`asterisk`/`slash` を `&kpls` 化 | コンボで対応記号が Mac で出る | 3.2 | cc:TODO（要実機） |
+| B.1 | Windows「設定 > 時刻と言語 > 言語と地域 > 日本語 > 言語のオプション > ハードウェア キーボード レイアウト」を **「英語キーボード (101/104 キー)」** に変更 | 設定画面で「英語キーボード」と表示される ~~| A.7 | cc:TODO（要ゆうご作業） |
+| B.2 | Windows にサインアウト / 再起動して設定を反映 | 反映後、LisM の `default_layer` で英字が出る | B.1 | cc:TODO（要ゆうご作業） |
+| B.3 | LisM で `mark_layer` K 位置（`&kp PIPE`）を押して Win でも `\|` が出ることを確認 | Win で `\|` が出る | B.2 | cc:TODO（要実機） |
 
-#### Phase 4: Win (JIS) での検証と回帰チェック
-
-| Task | 内容 | DoD | Depends | Status |
-|------|------|-----|---------|--------|
-| 4.1 | Win (JIS) で `bt_win` 切替後 `mark_layer` を試打 | `docs/report/mac-win-mark-layer-comparison.md` の Mac 列と同じ記号が出る（特に K 位置の `\|`） | 3.3 | cc:TODO（要実機） |
-| 4.2 | Mac で `bt_mac` 切替後 **Mission Control (Ctrl+↑) と Spaces 切替 (Ctrl+←/→) が効く** | 前回最大の地雷を踏んでいないことを確認 | 3.3 | cc:TODO（要実機） |
-| 4.3 | `bt_mac`/`bt_win` 切替直後の試打で記号崩れがないこと（初期状態の正しさ） | 切替後に記号が即正しく出る | 4.1, 4.2 | cc:TODO（要実機） |
-| 4.4 | 左キーボードが青 LED で繋がり続けること（Phase C 紫 LED 再発しない） | 数時間運用しても紫にならない | 4.1, 4.2 | cc:TODO（要実機） |
-
-#### Phase 5: 後始末
+#### Phase C: keymap の共通化（win_*_layer の削除）
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| 5.1 | 不要になった `win_mark_layer` を削除して `mark_layer` を共有（任意・今回は keymap 修正範囲を最小化したいなら見送り可） | 削除した場合は keymap が短くなる、見送る場合は判断を docs に記録 | 4.3, 4.4 | cc:TODO |
-| 5.2 | `docs/report/mac-win-mark-layer-comparison.md` を更新（実装と一致させる） | docs 内容が現 keymap と一致 | 5.1 | cc:TODO |
-| 5.3 | `feat/layout-shift-v2` を main にマージし `feat/zmk-layout-shift-jis` ブランチと `stash@{0}` `stash@{1}` を整理（残すか消すかを記録） | main に取り込み済み、退避物の処遇が記録される | 5.2 | cc:TODO |
+| C.1 | `win_mark_layer` を削除し、`mark_layer` を共有 | keymap から `win_mark_layer` が消える | B.3 | cc:TODO |
+| C.2 | `win_arrow_layer` を削除し、`arrow_layer` を共有 | `win_arrow_layer` 削除 | C.1 | cc:TODO |
+| C.3 | `win_function_number_layer` を削除し、`function_number_layer` を共有 | `win_function_number_layer` 削除 | C.2 | cc:TODO |
+| C.4 | `win_util_layer` を削除し、`util_layer` を共有（Mac/Win 差分のキー＝Mission Control / 仮想デスクトップ系は別マクロ化を検討） | `win_util_layer` 削除、または Mac/Win 差分マクロ | C.3 | cc:TODO |
+| C.5 | `win_default_layer` を削除し、`default_layer` を共有 | `win_default_layer` 削除 | C.4 | cc:TODO |
+| C.6 | レイヤー番号を 0〜6 に詰める、`#define` を整理、`&lt` 参照を整理 | レイヤー数が減って keymap が短くなる | C.5 | cc:TODO |
+| C.7 | `bt_mac` / `bt_win` から `&toggle_off/on 7`（win_default_layer トグル）を削除 | 2 マクロは BT_SEL だけになる | C.6 | cc:TODO |
+| C.8 | `make all` 成功、Mac/Win 両方で実機動作確認 | 5 種ビルド成功、両 OS で動作 | C.7 | cc:TODO（要実機） |
+
+#### Phase D: クリーンアップ
+
+| Task | 内容 | DoD | Depends | Status |
+|------|------|-----|---------|--------|
+| D.1 | `docs/report/mac-win-mark-layer-comparison.md` を新方針に合わせて更新（または削除） | docs が現状 keymap と一致 | C.8 | cc:TODO |
+| D.2 | `feat/layout-shift-v2` を main にマージ、不要ブランチ (`feat/zmk-layout-shift-jis`) と stash (`stash@{0}` `stash@{1}`) を整理 | main 取り込み、退避物の処遇記録 | D.1 | cc:TODO |
 
 ---
 
@@ -68,5 +62,6 @@
 
 完了した計画は以下に移動する。
 
-- Win 記号レイヤーを Mac と共通化（旧計画 v1 / `feat/zmk-layout-shift-jis`）— 2026-05-12 中断・破棄。詳細経緯は `docs/plan/layout-shift導入の引き継ぎ資料.md` の Phase A〜E を参照。新計画 v2 として再起動。
+- **Win 記号レイヤーを Mac と共通化（旧計画 v2 / zmk-layout-shift 採用）** — 2026-05-12 中断・破棄。理由: Win は LisM (BLE) を US キーボードとして認識するため、JIS HID コード (`LS(INT3)` 等) を送っても期待された記号が出ない。詳細は `docs/plan/Win側USキーボード化に方針変更.md` の「検証結果」参照。Phase 0.2〜1.3 までは実機 OK だったが、Phase 3.1 で Win 側に変換が効かないことを確認して方針変更。
+- Win 記号レイヤーを Mac と共通化（旧計画 v1 / `feat/zmk-layout-shift-jis`）— 2026-05-12 中断・破棄。詳細経緯は `docs/plan/layout-shift導入の引き継ぎ資料.md` の Phase A〜E を参照。
 - zmk-keymap-editor スキル作成（2026-05-10 完了 / 詳細: `docs/plan/zmk-keymap編集スキル作成計画.md`）
