@@ -64,26 +64,24 @@
 | G.0.4 | OS ショートカット差マッピングを確定: 行頭/行末 = HOME/END、デスクトップ = LG(LC(←/→)) + LG(TAB)/LG(D)、IME = LANG1/2 | 差分マッピングが確定 | G.0.3 | cc:完了 |
 | G.0.5 | 設計レビュー（ゆうご さん確認） | OK が出る | G.0.4 | cc:完了（2026-05-16 確認済み） |
 
-> **G.1 実装ステータス（2026-05-16）**: G.1.1〜G.1.8 は keymap 編集完了。`make all` ビルド確認 (G.2.1) 待ち。ビルド OK 後に cc:完了 にする。
-
 #### G.1 実装フェーズ
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| G.1.1 | `win_default_layer` の `&lt` 参照先を共通レイヤー (1/2/3/6) に付け替え | `&lt 1/2/3/6` に変更 | G.0.5 | cc:TODO |
-| G.1.2 | `win_mark_layer` と `win_function_number_layer` の 2 ブロックを keymap から削除 | 2 レイヤーが消える | G.1.1 | cc:TODO |
-| G.1.3 | `win_arrow_layer` を **薄いオーバーレイ**として書き直し: A 位置 `&kp HOME`、F 位置 `&kp END`、他は `&trans` | `win_arrow_layer` がオーバーレイ仕様 | G.1.2 | cc:TODO |
-| G.1.4 | `win_util_layer` を **薄いオーバーレイ**として書き直し: H 位置 `LG(LC(LEFT))`、J 位置 `LG(D)`、K 位置 `LG(TAB)`、L 位置 `LG(LC(RIGHT))`、他は `&trans`（メディア / BT 系は trans で共通レイヤーが見える） | `win_util_layer` がオーバーレイ仕様 | G.1.3 | cc:TODO |
-| G.1.5 | `#define WIN_MARK_LAYER` / `WIN_FUNCTION_NUMBER_LAYER` を削除し、`WIN_ARROW_LAYER` / `WIN_UTIL_LAYER` のレイヤー番号を 8 / 9 に詰める（または `WIN_ARROW_OVERLAY` / `WIN_UTIL_OVERLAY` にリネーム） | レイヤー番号が連番 | G.1.4 | cc:TODO |
-| G.1.6 | `conditional_layers` を追加: `if-layers = <7 2>; then-layer = <8>;` と `if-layers = <7 6>; then-layer = <9>;` | conditional_layers ノードが存在 | G.1.5 | cc:TODO |
-| G.1.7 | `combos` の `layers = <0 1 2 ... 11>` を `<0 1 2 3 4 5 6 7 8 9>` に修正 | combos のレイヤー範囲が正しい | G.1.6 | cc:TODO |
-| G.1.8 | `default_layer` / `win_default_layer` の修飾キー配置に diff がないことを確認 | 修飾キー配置 diff なし | G.1.7 | cc:TODO |
+| G.1.1 | `win_default_layer` の `&lt` 参照先を共通レイヤー (1/2/3/6) に付け替え | `&lt 1/2/3/6` に変更 | G.0.5 | cc:完了 |
+| G.1.2 | `win_mark_layer` と `win_function_number_layer` の 2 ブロックを keymap から削除 | 2 レイヤーが消える | G.1.1 | cc:完了 |
+| G.1.3 | `win_arrow_layer` を **薄いオーバーレイ**として書き直し: A 位置 `&kp HOME`、F 位置 `&kp END`、他は `&trans` | `win_arrow_layer` がオーバーレイ仕様 | G.1.2 | cc:完了 |
+| G.1.4 | `win_util_layer` を **薄いオーバーレイ**として書き直し: H 位置 `LG(LC(LEFT))`、J 位置 `LG(D)`、K 位置 `LG(TAB)`、L 位置 `LG(LC(RIGHT))`、他は `&trans`（メディア / BT 系は trans で共通レイヤーが見える） | `win_util_layer` がオーバーレイ仕様 | G.1.3 | cc:完了 |
+| G.1.5 | `#define WIN_MARK_LAYER` / `WIN_FUNCTION_NUMBER_LAYER` を削除し、`WIN_ARROW_LAYER` / `WIN_UTIL_LAYER` のレイヤー番号を 8 / 9 に詰める（または `WIN_ARROW_OVERLAY` / `WIN_UTIL_OVERLAY` にリネーム） | レイヤー番号が連番 | G.1.4 | cc:完了（OVERLAY にリネーム） |
+| G.1.6 | `conditional_layers` を追加: `if-layers = <7 2>; then-layer = <8>;` と `if-layers = <7 6>; then-layer = <9>;` | conditional_layers ノードが存在 | G.1.5 | cc:完了 |
+| G.1.7 | `combos` の `layers = <0 1 2 ... 11>` を `<0 1 2 3 4 5 6 7 8 9>` に修正 | combos のレイヤー範囲が正しい | G.1.6 | cc:完了 |
+| G.1.8 | `default_layer` / `win_default_layer` の修飾キー配置に diff がないことを確認 | 修飾キー配置 diff なし | G.1.7 | cc:完了 |
 
 #### G.2 検証フェーズ
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| G.2.1 | `make all` で 5 種すべてビルド成功 | ビルドログ全グリーン | G.1.8 | cc:TODO |
+| G.2.1 | `make all` / `make all_studio` で 6 種すべてビルド成功 | ビルドログ全グリーン | G.1.8 | cc:完了（2026-05-16 Dev Container で確認） |
 | G.2.2 | Mac 実機で全レイヤーが壊れていないことを確認 | Mac 側で記号・矢印・F1-F12・util 全動作 | G.2.1 | cc:TODO（要実機・ゆうご さん） |
 | G.2.3 | Win 実機で共通レイヤーが期待通り動くことを確認（記号・F1-F12 が Mac と同じ位置で出る） | Win 側で記号系全レイヤー動作 | G.2.2 | cc:TODO（要実機・ゆうご さん） |
 | G.2.4 | Win 実機で OS 差オーバーレイが効くことを確認: arrow_layer + win_default で HOME/END、util_layer + win_default で LG(LC(←/→))/LG(TAB)/LG(D) | OS 差動作 OK | G.2.3 | cc:TODO（要実機・ゆうご さん） |
