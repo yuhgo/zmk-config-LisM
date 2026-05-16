@@ -1,0 +1,8 @@
+{
+  "name": "zmk-config-LisM",
+  "version": "0.1.0",
+  "description": "LisM split keyboard ZMK firmware configuration",
+  "skills": [
+    "./skills/"
+  ]
+}

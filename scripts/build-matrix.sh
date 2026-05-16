@@ -2,19 +2,120 @@
 set -euo pipefail
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/build-helpers.sh"
 
+EXEC_MODE="sequential"
+PARALLEL_JOBS=""
+
+# --parallel[=N] 引数を解析
+if [[ "${1:-}" == --parallel* ]]; then
+  EXEC_MODE="parallel"
+  if [[ "${1}" == *=* ]]; then
+    PARALLEL_JOBS="${1#*=}"
+  fi
+  shift
+fi
+
 BUILD_MATRIX_PATH="${ROOT_DIR}/build.yaml"
 FILTER_MODE="${FILTER_MODE:-all}"  # all | include_studio | exclude_studio
 
 COUNT="$(yq -r '.include | length' "${BUILD_MATRIX_PATH}")"
 [ "${COUNT}" -gt 0 ] || { echo "No builds defined in ${BUILD_MATRIX_PATH}"; exit 1; }
 
-matched=0
+#
+# build_job idx
+#
+# A function that performs a single build from the matrix.
+# It takes the index of the build configuration as an argument.
+#
+build_job() {
+  local idx="$1"
 
-for idx in $(seq 0 $((COUNT - 1))); do
+  local BOARD
   BOARD="$(yq -r ".include[${idx}].board" "${BUILD_MATRIX_PATH}")"
+  local SHIELDS_LINE_RAW
   SHIELDS_LINE_RAW="$(yq -r ".include[${idx}].shield // \"\"" "${BUILD_MATRIX_PATH}")"
+  local ARTIFACT_NAME_CFG
   ARTIFACT_NAME_CFG="$(yq -r ".include[${idx}].[\"artifact-name\"] // \"\"" "${BUILD_MATRIX_PATH}")"
+  local SNIPPET
   SNIPPET="$(yq -r ".include[${idx}].snippet // \"\"" "${BUILD_MATRIX_PATH}")"
+  local CMAKE_ARGS_CFG_RAW
+  CMAKE_ARGS_CFG_RAW="$(yq -r ".include[${idx}].[\"cmake-args\"] // \"\"" "${BUILD_MATRIX_PATH}")"
+
+  echo "--- Starting build for ${ARTIFACT_NAME_CFG:-$BOARD} (index: ${idx}) ---"
+
+  local BUILD_DIR
+  BUILD_DIR="$(mktemp -d)"
+
+  # west の追加引数
+  local EXTRA_WEST_ARGS=()
+  [ -n "${SNIPPET}" ] && EXTRA_WEST_ARGS+=( -S "${SNIPPET}" )
+
+  # CMake 引数（配列のまま保持）
+  local CM_ARGS=()
+
+  # ZMK_CONFIG は常に追加
+  CM_ARGS+=( -DZMK_CONFIG="${CONFIG_DIR}" )
+  CM_ARGS+=( -DZMK_EXTRA_MODULES="${ROOT_DIR}" )
+
+  # SHIELD の値をメインで正規化し、-D と値を「別要素」で追加（値にクォートは含めない）
+  local SHIELDS_LINE
+  SHIELDS_LINE="$(echo "${SHIELDS_LINE_RAW}" | tr -s '[:space:]' ' ' | sed 's/^ *//; s/ *$//')"
+  if [ -n "${SHIELDS_LINE}" ]; then
+    declare -A _seen=()
+    local _items
+    read -r -a _items <<<"${SHIELDS_LINE}"
+    local uniq_items=()
+    local it
+    for it in "${_items[@]}"; do
+      [ -z "${it}" ] && continue
+      if [ -z "${_seen[${it}]+x}" ]; then
+        uniq_items+=( "${it}" )
+        _seen["${it}"]=1
+      fi
+    done
+    local SHIELD_VALUE
+    SHIELD_VALUE="$(IFS=' ' ; echo "${uniq_items[*]}")"
+    CM_ARGS+=( -D "SHIELD=${SHIELD_VALUE}" )
+  fi
+
+  # 追加 cmake-args（そのまま配列へ）
+  if [ -n "${CMAKE_ARGS_CFG_RAW}" ]; then
+    local cmargs
+    read -r -a cmargs <<<"${CMAKE_ARGS_CFG_RAW}"
+    CM_ARGS+=( "${cmargs[@]}" )
+  fi
+
+  # west build を配列のまま直接実行
+  local cmd=( west build -s zmk/app -d "${BUILD_DIR}" -b "${BOARD}" )
+  cmd+=( "${EXTRA_WEST_ARGS[@]}" )
+  cmd+=( -- )
+  cmd+=( "${CM_ARGS[@]}" )
+
+  (
+    cd "${WEST_WS}"
+    set -x
+    "${cmd[@]}"
+    set +x
+  )
+
+  # アーティファクト名
+  local ARTIFACT_NAME="${ARTIFACT_NAME_CFG}"
+  if [ -z "${ARTIFACT_NAME}" ]; then
+    if [ -n "${SHIELDS_LINE}" ]; then
+      ARTIFACT_NAME="$(echo "${SHIELDS_LINE}" | tr ' ' '-' )-${BOARD}-zmk"
+    else
+      ARTIFACT_NAME="${BOARD}-zmk"
+    fi
+  fi
+
+  copy_artifacts "${BUILD_DIR}" "${ARTIFACT_NAME}"
+  echo "--- Finished build for ${ARTIFACT_NAME_CFG:-$BOARD} (index: ${idx}) ---"
+}
+
+
+# Collect indices of matched builds first
+matched_indices=()
+for idx in $(seq 0 $((COUNT - 1))); do
+  ARTIFACT_NAME_CFG="$(yq -r ".include[${idx}].[\"artifact-name\"] // \"\"" "${BUILD_MATRIX_PATH}")"
 
   # フィルタ判定（artifact-name に studio を含むか）
   is_studio_entry=false
@@ -42,93 +143,58 @@ for idx in $(seq 0 $((COUNT - 1))); do
       ;;
   esac
 
-  matched=$((matched + 1))
+  matched_indices+=("${idx}")
+done
 
-  # overlay-path（配列/文字列両対応）を安全にまとめる
-  OVERLAY_NODE_TYPE="$(yq -r ".include[${idx}].[\"overlay-path\"] | type" "${BUILD_MATRIX_PATH}" || echo null)"
-  OVERLAY_ITEMS_STR=""
-  if [ "${OVERLAY_NODE_TYPE}" = "!!seq" ]; then
-    MAP_LEN="$(yq -r ".include[${idx}].[\"overlay-path\"] | length" "${BUILD_MATRIX_PATH}")"
-    for j in $(seq 0 $((MAP_LEN - 1))); do
-      item="$(yq -r ".include[${j}]" <(yq ".include[${idx}].[\"overlay-path\"]" "${BUILD_MATRIX_PATH}"))" || true
-      [ -n "${item}" ] && OVERLAY_ITEMS_STR="${OVERLAY_ITEMS_STR}${item} "
-    done
-  else
-    OVERLAY_ITEMS_STR="$(yq -r ".include[${idx}].[\"overlay-path\"] // \"\"" "${BUILD_MATRIX_PATH}")"
-  fi
+if [ ${#matched_indices[@]} -eq 0 ]; then
+  echo "ℹ No builds matched FILTER_MODE='${FILTER_MODE}' (artifact-name studio filter)."
+  exit 0
+fi
 
-  CMAKE_ARGS_CFG_RAW="$(yq -r ".include[${idx}].[\"cmake-args\"] // \"\"" "${BUILD_MATRIX_PATH}")"
+echo "Found ${#matched_indices[@]} matched builds to run."
 
-  BUILD_DIR="$(mktemp -d)"
-
-  # west の追加引数
-  EXTRA_WEST_ARGS=()
-  [ -n "${SNIPPET}" ] && EXTRA_WEST_ARGS+=( -S "${SNIPPET}" )
-
-  # CMake 引数（配列のまま保持）
-  CM_ARGS=()
-
-  # ZMK_CONFIG は常に追加
-  CM_ARGS+=( -DZMK_CONFIG="${CONFIG_DIR}" )
-
-  # SHIELD の値をメインで正規化し、-D と値を「別要素」で追加（値にクォートは含めない）
-  SHIELDS_LINE="$(echo "${SHIELDS_LINE_RAW}" | tr -s '[:space:]' ' ' | sed 's/^ *//; s/ *$//')"
-  if [ -n "${SHIELDS_LINE}" ]; then
-    declare -A _seen=()
-    read -r -a _items <<<"${SHIELDS_LINE}"
-    uniq_items=()
-    for it in "${_items[@]}"; do
-      [ -z "${it}" ] && continue
-      if [ -z "${_seen[${it}]+x}" ]; then
-        uniq_items+=( "${it}" )
-        _seen["${it}"]=1
-      fi
-    done
-    SHIELD_VALUE="$(IFS=' ' ; echo "${uniq_items[*]}")"
-    CM_ARGS+=( -D "SHIELD=${SHIELD_VALUE}" )
-  fi
-
-  # overlay + lism.keymap（値だけを返す関数に揃える） → 値を -D と別要素で追加
-  DTC_OVERLAY_VAL="$(prepare_overlay_value "${OVERLAY_ITEMS_STR}")"
-  if [ -n "${DTC_OVERLAY_VAL}" ]; then
-    CM_ARGS+=( -D "${DTC_OVERLAY_VAL}" )
-  fi
-
-  # 追加 cmake-args（そのまま配列へ）
-  if [ -n "${CMAKE_ARGS_CFG_RAW}" ]; then
-    read -r -a cmargs <<<"${CMAKE_ARGS_CFG_RAW}"
-    CM_ARGS+=( "${cmargs[@]}" )
-  fi
-
-  # west build を配列のまま直接実行
-  cmd=( west build -s zmk/app -d "${BUILD_DIR}" -b "${BOARD}" )
-  cmd+=( "${EXTRA_WEST_ARGS[@]}" )
-  cmd+=( -- )
-  cmd+=( "${CM_ARGS[@]}" )
-
-  (
-    cd "${WEST_WS}"
-    set -x
-    "${cmd[@]}"
-    set +x
-  )
-
-  # アーティファクト名
-  ARTIFACT_NAME="${ARTIFACT_NAME_CFG}"
-  if [ -z "${ARTIFACT_NAME}" ]; then
-    if [ -n "${SHIELDS_LINE}" ]; then
-      ARTIFACT_NAME="$(echo "${SHIELDS_LINE}" | tr ' ' '-' )-${BOARD}-zmk"
+# Execute builds based on the selected mode
+if [ "${EXEC_MODE}" = "parallel" ]; then
+  if [ -z "${PARALLEL_JOBS}" ]; then
+    if command -v nproc > /dev/null; then
+      PARALLEL_JOBS=$(nproc)
+    elif command -v sysctl > /dev/null; then
+      PARALLEL_JOBS=$(sysctl -n hw.ncpu)
     else
-      ARTIFACT_NAME="${BOARD}-zmk"
+      PARALLEL_JOBS=2 # Fallback to a safe default
     fi
   fi
 
-  copy_artifacts "${BUILD_DIR}" "${ARTIFACT_NAME}"
-done
+  echo "Running builds in parallel with up to ${PARALLEL_JOBS} jobs."
 
-if [ "${matched}" -eq 0 ]; then
-  echo "ℹ No builds matched FILTER_MODE='${FILTER_MODE}' (artifact-name studio filter)."
-  exit 0
+  pids=()
+  for idx in "${matched_indices[@]}"; do
+    # Limit the number of concurrent jobs
+    while [[ $(jobs -p | wc -l) -ge ${PARALLEL_JOBS} ]]; do
+      sleep 1
+    done
+
+    build_job "${idx}" &
+    pids+=($!)
+  done
+
+  exit_code=0
+  echo "Waiting for all parallel builds to complete..."
+  for pid in "${pids[@]}"; do
+    if ! wait "${pid}"; then
+      echo "🔥 Build with PID ${pid} failed." >&2
+      exit_code=1
+    fi
+  done
+
+  if [ "${exit_code}" -ne 0 ]; then
+    echo "🔥 One or more parallel builds failed." >&2
+    exit "${exit_code}"
+  fi
+else # sequential
+  for idx in "${matched_indices[@]}"; do
+    build_job "${idx}"
+  done
 fi
 
 echo "🎉 All builds copied to ${OUTPUT_DIR}"

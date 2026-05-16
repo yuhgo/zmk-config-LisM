@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>keymap 共通化と Win 用 OS 差オーバーレイ設計（v5 確定版）</title>
+<style>
+  :root {
+    --fg: #1f2328;
+    --muted: #59636e;
+    --border: #d1d9e0;
+    --bg: #ffffff;
+    --bg-soft: #f6f8fa;
+    --accent: #0969da;
+    --warn-bg: #fff8c5;
+    --warn-border: #d4a72c;
+    --info-bg: #ddf4ff;
+    --info-border: #54aeff;
+    --ok-bg: #dafbe1;
+    --ok-border: #1a7f37;
+    --code-bg: #eff1f3;
+    --strike: #cf222e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    line-height: 1.65;
+  }
+  h1 {
+    font-size: 1.85rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4em;
+    margin-top: 0;
+  }
+  h2 {
+    font-size: 1.35rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3em;
+    margin-top: 2em;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 1.6em;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2em 0;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+  pre {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.9rem;
+    display: block;
+    overflow-x: auto;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-soft);
+    font-weight: 600;
+  }
+  tr:nth-child(2n) td {
+    background: #fbfcfd;
+  }
+  blockquote {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    margin: 1em 0;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p { margin: 0.3em 0; }
+  .info {
+    background: var(--info-bg);
+    border-left: 4px solid var(--info-border);
+    margin: 1em 0;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+  }
+  .info p { margin: 0.3em 0; }
+  .ok {
+    background: var(--ok-bg);
+    border-left: 4px solid var(--ok-border);
+    margin: 1em 0;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+  }
+  .ok p { margin: 0.3em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.2em 0; }
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+  .checklist li {
+    padding-left: 1.8em;
+    position: relative;
+  }
+  .checklist li.done::before {
+    content: "☑";
+    position: absolute;
+    left: 0.2em;
+    color: var(--ok-border);
+    font-size: 1.1em;
+  }
+  .checklist li:not(.done)::before {
+    content: "☐";
+    position: absolute;
+    left: 0.2em;
+    color: var(--muted);
+    font-size: 1.1em;
+  }
+  .strike {
+    text-decoration: line-through;
+    color: var(--strike);
+  }
+  .muted { color: var(--muted); }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-top: -0.5em;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 6px;
+    vertical-align: 0.15em;
+  }
+  .badge-delete { background: #ffebe9; color: #cf222e; border: 1px solid #ffcecb; }
+  .badge-keep   { background: #dafbe1; color: #1a7f37; border: 1px solid #aceebb; }
+  .badge-share  { background: #ddf4ff; color: #0969da; border: 1px solid #b6e3ff; }
+  .badge-new    { background: #fff8c5; color: #9a6700; border: 1px solid #f3d07b; }
+  .toc {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 1.5em 0 2em;
+    font-size: 0.92rem;
+  }
+  .toc strong { display: block; margin-bottom: 0.4em; }
+  .toc ol { margin: 0; padding-left: 1.4em; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  strong { font-weight: 600; }
+  .arch-diagram {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 24px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>keymap 共通化と Win 用 OS 差オーバーレイ設計</h1>
+<p class="meta">v5 確定版　|　前提: <strong>Mac / Win 両方とも US 配列</strong>　|　最終更新: 2026-05-16　|　対応 Plans: Phase G</p>
+
+<div class="toc">
+  <strong>目次</strong>
+  <ol>
+    <li><a href="#goal">ゴール</a></li>
+    <li><a href="#why">なぜ共通化できるのか</a></li>
+    <li><a href="#arch">OS 差吸収のアーキテクチャ</a></li>
+    <li><a href="#layers">レイヤー構成（最終）</a></li>
+    <li><a href="#mapping">OS 差マッピング詳細</a></li>
+    <li><a href="#lt-replace"><code>win_default_layer</code> の <code>&amp;lt</code> 参照先付け替え</a></li>
+    <li><a href="#cond"><code>conditional_layers</code> 設定</a></li>
+    <li><a href="#defines">削除する <code>#define</code></a></li>
+    <li><a href="#order">実装順序</a></li>
+    <li><a href="#verify">検証項目</a></li>
+    <li><a href="#review">レビュー（確定済み）</a></li>
+  </ol>
+</div>
+
+<h2 id="goal">ゴール</h2>
+<p><strong>Mac / Win とも US 配列で運用する</strong>前提で、以下を達成する。</p>
+<ul>
+  <li>記号系レイヤーは Mac/Win で <strong>完全共有</strong></li>
+  <li><code>win_mark_layer</code> / <code>win_function_number_layer</code> は <strong>削除</strong></li>
+  <li><code>win_arrow_layer</code> / <code>win_util_layer</code> は <strong>薄い OS 差オーバーレイ</strong> として再構築</li>
+  <li><code>conditional_layers</code> で「<code>win_default_layer</code> (7) が on のとき」だけオーバーレイを自動 on</li>
+  <li><code>default_layer</code> / <code>win_default_layer</code> の修飾キー配置は <strong>現状維持</strong></li>
+</ul>
+
+<hr>
+
+<h2 id="why">なぜ共通化できるのか</h2>
+<div class="info">
+  <p>両 OS が US 配列を期待しているので、ZMK が送る HID コード（US 配列基準）を Mac/Win は同じように解釈する。</p>
+  <p>→ 記号レイヤー・F1-F12・数字・矢印などは <strong>そのまま共有できる</strong>。<br>
+  → 差が出るのは「OS ショートカット」だけ（行頭ジャンプ、デスクトップ移動など）。</p>
+</div>
+
+<hr>
+
+<h2 id="arch">OS 差吸収のアーキテクチャ</h2>
+
+<h3>全体図</h3>
+<div class="arch-diagram">                    ┌─────────────────────┐
+       Mac 接続時:  │ default_layer (0)   │ ← 基底
+                    └─────────────────────┘
+                              ↓
+                    使うレイヤー: 1, 2, 3, 6
+                    （Mac 仕様の HID が送られる）
+
+                    ┌─────────────────────┐
+       Win 接続時:  │ default_layer (0)   │ ← 基底
+                    │ win_default_layer(7)│ ← Win フラグ兼用、常時 on
+                    └─────────────────────┘
+                              ↓
+                    arrow_layer (2) を発動すると
+                    conditional_layers が
+                    win_arrow_overlay (8) を自動 on
+                              ↓
+                    オーバーレイのキーが優先される
+                    （HOME/END などが送られる）</div>
+
+<h3>キーポイント</h3>
+<ul>
+  <li><code>win_default_layer</code> (7) を <strong>「Win 用 OS フラグ」として兼用</strong>。<code>bt_mac</code> / <code>bt_win</code> マクロが toggle するので、Win 接続時のみ on になる。</li>
+  <li><code>conditional_layers</code> で「7 + 2 が両方 on のとき → 8 も on」「7 + 6 が両方 on のとき → 9 も on」を宣言。</li>
+  <li>オーバーレイ (8, 9) は <strong>差分だけ書く</strong>。残りは全部 <code>&amp;trans</code> で下のレイヤー（2 や 6）が透過して見える。</li>
+</ul>
+
+<hr>
+
+<h2 id="layers">レイヤー構成（最終）</h2>
+<table>
+  <thead>
+    <tr><th>#</th><th>レイヤー名</th><th>役割</th><th>中身</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td><code>default_layer</code></td><td>Mac 用基底</td><td>既存維持 <span class="badge badge-keep">保持</span></td></tr>
+    <tr><td>1</td><td><code>mark_layer</code></td><td>記号</td><td>既存維持 <span class="badge badge-share">共有</span></td></tr>
+    <tr><td>2</td><td><code>arrow_layer</code></td><td>矢印 + Mac 仕様の行頭/行末</td><td>既存維持（<code>LG(LEFT)</code> / <code>LG(RIGHT)</code>） <span class="badge badge-share">共有</span></td></tr>
+    <tr><td>3</td><td><code>function_number_layer</code></td><td>F1-F12 / 数字</td><td>既存維持 <span class="badge badge-share">共有</span></td></tr>
+    <tr><td>4</td><td><code>mouse_layer</code></td><td>マウス</td><td>既存維持 <span class="badge badge-keep">保持</span></td></tr>
+    <tr><td>5</td><td><code>scroll_layer</code></td><td>スクロール</td><td>既存維持 <span class="badge badge-keep">保持</span></td></tr>
+    <tr><td>6</td><td><code>util_layer</code></td><td>メディア / BT / Mac デスクトップ移動</td><td>既存維持（<code>RC(LEFT)</code> 等） <span class="badge badge-share">共有</span></td></tr>
+    <tr><td>7</td><td><code>win_default_layer</code></td><td>Win 用基底 + OS フラグ</td><td><code>&amp;lt</code> 参照先を共通レイヤーに変更</td></tr>
+    <tr><td><strong>8</strong></td><td><strong><code>win_arrow_overlay</code></strong></td><td><strong>Win 用 arrow 差分</strong></td><td><strong>新規（差分のみ）</strong> <span class="badge badge-new">新設</span></td></tr>
+    <tr><td><strong>9</strong></td><td><strong><code>win_util_overlay</code></strong></td><td><strong>Win 用 util 差分</strong></td><td><strong>新規（差分のみ）</strong> <span class="badge badge-new">新設</span></td></tr>
+  </tbody>
+</table>
+<p>combos の <code>layers = &lt;0 1 2 3 4 5 6 7&gt;</code> → <code>&lt;0 1 2 3 4 5 6 7 8 9&gt;</code> に拡張。</p>
+
+<hr>
+
+<h2 id="mapping">OS 差マッピング詳細</h2>
+
+<h3><code>win_arrow_overlay</code> (#8) の中身</h3>
+<p><code>arrow_layer</code> (2) と同じキー位置で、Win 用に差分だけ書く。</p>
+<table>
+  <thead>
+    <tr><th>物理位置</th><th>Mac (<code>arrow_layer</code>)</th><th>Win オーバーレイ (<code>win_arrow_overlay</code>)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>A 位置 (row1 左1)</td><td><code>&amp;kp LG(LEFT)</code></td><td><strong><code>&amp;kp HOME</code></strong></td></tr>
+    <tr><td>F 位置 (row1 左4)</td><td><code>&amp;kp LG(RIGHT)</code></td><td><strong><code>&amp;kp END</code></strong></td></tr>
+    <tr><td>その他全部</td><td>（省略）</td><td><strong><code>&amp;trans</code></strong>（下の arrow_layer が見える）</td></tr>
+  </tbody>
+</table>
+
+<h3><code>win_util_overlay</code> (#9) の中身</h3>
+<p><code>util_layer</code> (6) と同じキー位置で、Win 用に差分だけ書く。</p>
+<table>
+  <thead>
+    <tr><th>物理位置</th><th>Mac (<code>util_layer</code>)</th><th>Win オーバーレイ (<code>win_util_overlay</code>)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>H 位置 (row1 右1)</td><td><code>&amp;kp RC(LEFT)</code></td><td><strong><code>&amp;kp LG(LC(LEFT))</code></strong>（デスクトップ左）</td></tr>
+    <tr><td>J 位置 (row1 右2)</td><td><code>&amp;kp RC(DOWN)</code></td><td><strong><code>&amp;kp LG(D)</code></strong>（デスクトップ表示）</td></tr>
+    <tr><td>K 位置 (row1 右3)</td><td><code>&amp;kp RC(UP)</code></td><td><strong><code>&amp;kp LG(TAB)</code></strong>（タスクビュー）</td></tr>
+    <tr><td>L 位置 (row1 右4)</td><td><code>&amp;kp RC(RIGHT)</code></td><td><strong><code>&amp;kp LG(LC(RIGHT))</code></strong>（デスクトップ右）</td></tr>
+    <tr><td>その他全部</td><td>（省略）</td><td><strong><code>&amp;trans</code></strong>（メディア・BT・輝度・Studio は共通レイヤーが見える）</td></tr>
+  </tbody>
+</table>
+
+<h3>IME 切替</h3>
+<p><code>default_layer</code> / <code>win_default_layer</code> 両方で <strong><code>LANG1</code> / <code>LANG2</code></strong> を使う（Mac と同じ HID）。</p>
+<blockquote>
+  <p>⚠️ Win 側でも <code>LANG1</code> / <code>LANG2</code> を IME 切替として受け取れる前提（要実機検証）。NG なら後で <code>LA(GRAVE)</code> (Alt+`) などに切り替える。</p>
+</blockquote>
+
+<hr>
+
+<h2 id="lt-replace"><code>win_default_layer</code> の <code>&amp;lt</code> 参照先付け替え</h2>
+
+<h3>現状</h3>
+<pre><code>&amp;lt 8 LANG2   ← MARK_LAYER 相当（win_mark_layer 参照）
+&amp;lt 9 SPACE   ← ARROW_LAYER 相当（win_arrow_layer 参照）
+&amp;lt 10 DELETE ← FUNCTION_NUMBER_LAYER 相当（win_function_number_layer 参照）
+&amp;lt 11 LANG1  ← UTIL_LAYER 相当（win_util_layer 参照）</code></pre>
+
+<h3>変更後</h3>
+<pre><code>&amp;lt 1 LANG2   ← MARK_LAYER (共通)
+&amp;lt 2 SPACE   ← ARROW_LAYER (共通)  ※ conditional で #8 が自動 on
+&amp;lt 3 DELETE  ← FUNCTION_NUMBER_LAYER (共通)
+&amp;lt 6 LANG1   ← UTIL_LAYER (共通)  ※ conditional で #9 が自動 on</code></pre>
+
+<hr>
+
+<h2 id="cond"><code>conditional_layers</code> 設定</h2>
+<p><code>/ { conditional_layers { ... } }</code> ノードを追加:</p>
+<pre><code>conditional_layers {
+    compatible = "zmk,conditional-layers";
+
+    win_arrow_overlay {
+        if-layers = &lt;7 2&gt;;
+        then-layer = &lt;8&gt;;
+    };
+
+    win_util_overlay {
+        if-layers = &lt;7 6&gt;;
+        then-layer = &lt;9&gt;;
+    };
+};</code></pre>
+<p><code>win_default_layer</code> (7) は常時 on（Win 接続中）なので、<code>arrow_layer</code> (2) が活性化したら自動で 8 も on、<code>util_layer</code> (6) が活性化したら自動で 9 も on になる。</p>
+
+<hr>
+
+<h2 id="defines">削除する <code>#define</code></h2>
+<pre><code>#define WIN_MARK_LAYER 8           ← 削除
+#define WIN_FUNCTION_NUMBER_LAYER 10 ← 削除</code></pre>
+
+<p>残す（番号変更）:</p>
+<pre><code>#define WIN_ARROW_LAYER 8    （旧 9 → 8）  または WIN_ARROW_OVERLAY にリネーム
+#define WIN_UTIL_LAYER 9     （旧 11 → 9） または WIN_UTIL_OVERLAY にリネーム</code></pre>
+
+<hr>
+
+<h2 id="order">実装順序</h2>
+<ol>
+  <li><strong>G.1.1</strong>: <code>win_default_layer</code> の <code>&amp;lt</code> 参照先を <code>1/2/3/6</code> に変更</li>
+  <li><strong>G.1.2</strong>: <code>win_mark_layer</code> と <code>win_function_number_layer</code> を削除</li>
+  <li><strong>G.1.3</strong>: <code>win_arrow_layer</code> をオーバーレイ仕様に書き換え（HOME/END + その他 trans）</li>
+  <li><strong>G.1.4</strong>: <code>win_util_layer</code> をオーバーレイ仕様に書き換え（デスクトップ移動 + その他 trans）</li>
+  <li><strong>G.1.5</strong>: <code>#define</code> を整理（番号を 8, 9 に詰める）</li>
+  <li><strong>G.1.6</strong>: <code>conditional_layers</code> ノードを追加</li>
+  <li><strong>G.1.7</strong>: <code>combos</code> の <code>layers</code> を <code>&lt;0..9&gt;</code> に修正</li>
+  <li><strong>G.1.8</strong>: default_layer 系の修飾キー配置に diff がないか確認</li>
+</ol>
+
+<hr>
+
+<h2 id="verify">検証項目（G.2）</h2>
+
+<h3>Mac 側</h3>
+<ul>
+  <li>記号レイヤー: 既存動作維持</li>
+  <li>arrow_layer: <code>LG(LEFT)</code> / <code>LG(RIGHT)</code> で行頭・行末ジャンプ</li>
+  <li>util_layer: <code>RC(LEFT)</code> 等で Mission Control 操作</li>
+  <li>オーバーレイは Win フラグが off なので発動しない</li>
+</ul>
+
+<h3>Win 側</h3>
+<ul>
+  <li>記号レイヤー: Mac と同じキー位置で同じ記号が出る（US/US なので HID 共通）</li>
+  <li>arrow_layer + win_default で <strong>HOME / END</strong> が出る</li>
+  <li>util_layer + win_default で <strong>デスクトップ移動 / タスクビュー / デスクトップ表示</strong> が出る</li>
+  <li>IME 切替: <code>LANG1</code> / <code>LANG2</code> が Win IME ON/OFF として効くか確認</li>
+</ul>
+
+<hr>
+
+<h2 id="review">レビュー（2026-05-16 確定済み）</h2>
+<div class="ok">
+  <p>ゆうご さんとの対話で全項目確定済み。実装フェーズ (G.1) に進む。</p>
+</div>
+<ul class="checklist">
+  <li class="done">Mac/Win 両方 US 配列前提</li>
+  <li class="done">OS 差吸収方式: <code>conditional_layers</code> + オーバーレイレイヤー</li>
+  <li class="done">OS 判定: <code>win_default_layer</code> (7) の on/off</li>
+  <li class="done">行頭/行末 (Win): HOME / END</li>
+  <li class="done">デスクトップ移動 (Win): 左右 LG(LC(←/→))、上 LG(TAB)、下 LG(D)</li>
+  <li class="done">IME 切替: LANG1 / LANG2（Mac と同じ HID）</li>
+  <li class="done">レイヤー番号: 0〜9 に整理</li>
+</ul>
+
+</body>
+</html>
