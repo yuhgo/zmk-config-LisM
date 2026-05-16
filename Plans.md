@@ -108,13 +108,29 @@
 
 | Task | 内容 | DoD | Depends | Status |
 |------|------|-----|---------|--------|
-| H.1 | `#define` のレイヤー番号を再配置（win_default_layer=1, mark=2, arrow=3, function=4, mouse=5, scroll=6, util=7） | #define が新番号 | G.2.1 | cc:完了 |
+| H.1 | `#define` のレイヤー番号を再配置（win_default_layer=1, arrow=2, mark=3, function=4, mouse=5, scroll=6, util=7） | #define が新番号 | G.2.1 | cc:完了 |
 | H.2 | `&lt` / `&mo` / `&toggle_on/off` の番号参照を全部更新 | 参照が新番号と一致 | H.1 | cc:完了 |
-| H.3 | `conditional_layers` の `if-layers` を更新（`<7 2>`→`<1 3>`, `<7 6>`→`<1 7>`） | conditional_layers が新番号 | H.2 | cc:完了 |
-| H.4 | keymap ブロックの出現順序を新しい番号順に並び替え（win_default_layer を 2 番目に移動） | ブロック順序＝レイヤー番号 | H.3 | cc:完了 |
+| H.3 | `conditional_layers` の `if-layers` を更新（`<7 2>`→`<1 2>`, `<7 6>`→`<1 7>`） | conditional_layers が新番号 | H.2 | cc:完了 |
+| H.4 | keymap ブロックの出現順序を新しい番号順に並び替え（win_default_layer を 2 番目、arrow_layer を 3 番目に） | ブロック順序＝レイヤー番号 | H.3 | cc:完了 |
 | H.5 | 再ビルド（make all_studio で 6 種全部） | ビルド全グリーン | H.4 | cc:完了 |
-| H.6 | Win 実機で記号レイヤー・BT 切替が機能することを確認 | Win で記号・BT 動作 | H.5 | cc:TODO（要実機・ゆうご さん） |
+| H.6 | Win 実機で記号レイヤー・BT 切替が機能することを確認 | Win で記号・BT 動作 | H.5 | cc:完了（2026-05-17 確認済み） |
 | H.7 | Mac 実機で既存挙動が壊れていないことを確認 | Mac で全レイヤー動作 | H.6 | cc:TODO（要実機・ゆうご さん） |
+
+### Phase I: トラックボール scroller 契約の維持（H 後の hotfix）
+
+実機検証で発覚した追加不具合:
+- **症状**: スクロールレイヤーが効かなくなった（H.6 で記号・BT は直ったが、スクロールが死んだ）
+- **原因**: `_west/zmk-keyboards-LisM/boards/shields/lism/trackball_r.overlay` の `scroller { layers = <2>; }` で「レイヤー 2 が active のときトラックボール XY をスクロールに変換」がハードコードされていた。旧設計ではレイヤー 2 = `arrow_layer` だったが、Phase H で 2 = `mark_layer` に変わり、トラックボール契約が壊れた
+- **対策**: Phase H で割り振った `mark_layer` と `arrow_layer` の番号を入れ替え、`arrow_layer = 2` の契約を維持する
+
+| Task | 内容 | DoD | Depends | Status |
+|------|------|-----|---------|--------|
+| I.1 | `#define` で `ARROW_LAYER` と `MARK_LAYER` の番号を入れ替え（arrow=2, mark=3） | #define が新番号 | H.5 | cc:完了 |
+| I.2 | `&lt` 参照を更新（`&lt 2 SPACE`/`&lt 2 L`→arrow=2、`&lt 3 LANG2`→mark=3） | 参照が新番号と一致 | I.1 | cc:完了 |
+| I.3 | `conditional_layers` の `<1 3>` を `<1 2>` に戻す（win+arrow→8） | conditional_layers が新番号 | I.2 | cc:完了 |
+| I.4 | keymap ブロックの順序: `arrow_layer` を `mark_layer` より前に移動 | ブロック順序＝レイヤー番号 | I.3 | cc:完了 |
+| I.5 | 再ビルド（make 通常版 + 必要なら all_studio） | ビルド全グリーン | I.4 | cc:完了 |
+| I.6 | Win/Mac 実機で記号・BT・スクロール・OS 差オーバーレイ全部動くことを確認 | 全レイヤー動作 | I.5 | cc:TODO（要実機・ゆうご さん） |
 
 ---
 
@@ -123,14 +139,14 @@
 | # | レイヤー | 役割 | 備考 |
 |---|---------|------|------|
 | 0 | `default_layer` | Mac 用文字入力 + 修飾キー | 変更なし |
-| **1** | **`win_default_layer`** | **Win 用文字入力 + 修飾キー** | **OS 判定フラグを兼ねる（Phase H で番号変更）** |
-| 2 | `mark_layer` | 記号 | Mac/Win 共有 |
-| 3 | `arrow_layer` | 矢印 + 行頭・行末ジャンプ (Mac 仕様) | Mac/Win 共有（差分は #8 で吸収） |
+| 1 | `win_default_layer` | Win 用文字入力 + 修飾キー | OS 判定フラグを兼ねる（Phase H で番号変更） |
+| **2** | **`arrow_layer`** | **矢印 + 行頭・行末ジャンプ (Mac 仕様)** | **Mac/Win 共有（差分は #8 で吸収）。トラックボール scroller 契約のためここで固定（Phase I）** |
+| 3 | `mark_layer` | 記号 | Mac/Win 共有 |
 | 4 | `function_number_layer` | F1-F12 / 数字 | Mac/Win 共有 |
 | 5 | `mouse_layer` | マウス | 変更なし |
 | 6 | `scroll_layer` | スクロール | 変更なし |
 | 7 | `util_layer` | メディア / BT / 輝度 / Studio / デスクトップ移動 (Mac 仕様) | Mac/Win 共有（差分は #9 で吸収） |
-| 8 | `win_arrow_overlay` | Win 用 arrow 差分（HOME/END） | `conditional_layers` で 1+3 のとき on |
+| 8 | `win_arrow_overlay` | Win 用 arrow 差分（HOME/END） | `conditional_layers` で 1+2 のとき on |
 | 9 | `win_util_overlay` | Win 用 util 差分（デスクトップ移動） | `conditional_layers` で 1+7 のとき on |
 
 combos の `layers = <0 1 2 3 4 5 6 7 8 9>` に修正。
