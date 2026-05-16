@@ -99,20 +99,39 @@
 
 ---
 
+### Phase H: レイヤー番号再配置（Win 不具合 hotfix）
+
+実機検証で発覚した不具合への対応:
+- **症状**: Win 側で記号レイヤー・BT 切替が効かない
+- **原因**: ZMK は「レイヤー番号が大きい方が優先」のルール。`win_default_layer (7)` が共通レイヤー (1〜6) より上にあったため、Win 時に `mark_layer (1)` などを on にしても win_default_layer に上書きされて見えなかった
+- **対策**: `win_default_layer` を 1 に下げ、共通レイヤーを 2〜7 に上げる
+
+| Task | 内容 | DoD | Depends | Status |
+|------|------|-----|---------|--------|
+| H.1 | `#define` のレイヤー番号を再配置（win_default_layer=1, mark=2, arrow=3, function=4, mouse=5, scroll=6, util=7） | #define が新番号 | G.2.1 | cc:完了 |
+| H.2 | `&lt` / `&mo` / `&toggle_on/off` の番号参照を全部更新 | 参照が新番号と一致 | H.1 | cc:完了 |
+| H.3 | `conditional_layers` の `if-layers` を更新（`<7 2>`→`<1 3>`, `<7 6>`→`<1 7>`） | conditional_layers が新番号 | H.2 | cc:完了 |
+| H.4 | keymap ブロックの出現順序を新しい番号順に並び替え（win_default_layer を 2 番目に移動） | ブロック順序＝レイヤー番号 | H.3 | cc:完了 |
+| H.5 | 再ビルド（make all_studio で 6 種全部） | ビルド全グリーン | H.4 | cc:完了 |
+| H.6 | Win 実機で記号レイヤー・BT 切替が機能することを確認 | Win で記号・BT 動作 | H.5 | cc:TODO（要実機・ゆうご さん） |
+| H.7 | Mac 実機で既存挙動が壊れていないことを確認 | Mac で全レイヤー動作 | H.6 | cc:TODO（要実機・ゆうご さん） |
+
+---
+
 ## 参考: 最終レイヤー構成
 
 | # | レイヤー | 役割 | 備考 |
 |---|---------|------|------|
 | 0 | `default_layer` | Mac 用文字入力 + 修飾キー | 変更なし |
-| 1 | `mark_layer` | 記号 | Mac/Win 共有 |
-| 2 | `arrow_layer` | 矢印 + 行頭・行末ジャンプ (Mac 仕様) | Mac/Win 共有（差分は #8 で吸収） |
-| 3 | `function_number_layer` | F1-F12 / 数字 | Mac/Win 共有 |
-| 4 | `mouse_layer` | マウス | 変更なし |
-| 5 | `scroll_layer` | スクロール | 変更なし |
-| 6 | `util_layer` | メディア / BT / 輝度 / Studio / デスクトップ移動 (Mac 仕様) | Mac/Win 共有（差分は #9 で吸収） |
-| 7 | `win_default_layer` | Win 用文字入力 + 修飾キー | OS 判定フラグを兼ねる |
-| 8 | `win_arrow_overlay` | Win 用 arrow 差分（HOME/END） | `conditional_layers` で 7+2 のとき on |
-| 9 | `win_util_overlay` | Win 用 util 差分（デスクトップ移動） | `conditional_layers` で 7+6 のとき on |
+| **1** | **`win_default_layer`** | **Win 用文字入力 + 修飾キー** | **OS 判定フラグを兼ねる（Phase H で番号変更）** |
+| 2 | `mark_layer` | 記号 | Mac/Win 共有 |
+| 3 | `arrow_layer` | 矢印 + 行頭・行末ジャンプ (Mac 仕様) | Mac/Win 共有（差分は #8 で吸収） |
+| 4 | `function_number_layer` | F1-F12 / 数字 | Mac/Win 共有 |
+| 5 | `mouse_layer` | マウス | 変更なし |
+| 6 | `scroll_layer` | スクロール | 変更なし |
+| 7 | `util_layer` | メディア / BT / 輝度 / Studio / デスクトップ移動 (Mac 仕様) | Mac/Win 共有（差分は #9 で吸収） |
+| 8 | `win_arrow_overlay` | Win 用 arrow 差分（HOME/END） | `conditional_layers` で 1+3 のとき on |
+| 9 | `win_util_overlay` | Win 用 util 差分（デスクトップ移動） | `conditional_layers` で 1+7 のとき on |
 
 combos の `layers = <0 1 2 3 4 5 6 7 8 9>` に修正。
 

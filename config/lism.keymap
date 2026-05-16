@@ -8,13 +8,13 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define DEFAULT_LAYER 0
-#define MARK_LAYER 1
-#define ARROW_LAYER 2
-#define FUNCTION_NUMBER_LAYER 3
-#define MOUSE_LAYER 4
-#define SCROLL_LAYER 5
-#define UTIL_LAYER 6
-#define WIN_DEFAULT_LAYER 7
+#define WIN_DEFAULT_LAYER 1
+#define MARK_LAYER 2
+#define ARROW_LAYER 3
+#define FUNCTION_NUMBER_LAYER 4
+#define MOUSE_LAYER 5
+#define SCROLL_LAYER 6
+#define UTIL_LAYER 7
 #define WIN_ARROW_OVERLAY 8
 #define WIN_UTIL_OVERLAY 9
 
@@ -27,12 +27,12 @@
         compatible = "zmk,conditional-layers";
 
         win_arrow_overlay {
-            if-layers = <7 2>;
+            if-layers = <1 3>;
             then-layer = <8>;
         };
 
         win_util_overlay {
-            if-layers = <7 6>;
+            if-layers = <1 7>;
             then-layer = <9>;
         };
     };
@@ -153,7 +153,7 @@
         bt_mac: bt_mac {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&toggle_off 7>, <&macro_wait_time 100>, <&bt BT_SEL 0>;
+            bindings = <&toggle_off 1>, <&macro_wait_time 100>, <&bt BT_SEL 0>;
 
             label = "BT_MAC";
         };
@@ -162,9 +162,9 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
-                <&toggle_off 7>,
+                <&toggle_off 1>,
                 <&macro_wait_time 100>,
-                <&bt BT_SEL 1 &toggle_on 7>;
+                <&bt BT_SEL 1 &toggle_on 1>;
 
             label = "BT_WIN";
         };
@@ -214,7 +214,7 @@
             label = "LAYER3_BACKSPACE_TD";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo 3>, <&kp BACKSPACE>;
+            bindings = <&mo 4>, <&kp BACKSPACE>;
         };
 
         tab_enter_td: tab_enter_td {
@@ -246,9 +246,21 @@
             display-name = "Default Layer";
             bindings = <
 &kp Q             &kp W         &kp E             &kp R        &kp T                                       &kp Y        &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 2 L    &kp RETURN
+&mt LCTRL A       &kp S         &kp D             &kp F        &kp G                                       &kp H        &kp J   &kp K      &lt 3 L    &kp RETURN
 &mt LEFT_SHIFT Z  &kp X         &kp C             &kp V        &kp B                                       &kp N        &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &mac_p     &master_p  &kp TAB
+&kp LCTRL         &kp LEFT_ALT  &mt LEFT_WIN ESC  &lt 2 LANG2  &lt 3 SPACE  &lt 4 DELETE    &kp BACKSPACE  &lt 7 LANG1  &trans  &mac_p     &master_p  &kp TAB
+            >;
+
+            sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
+        };
+
+        win_default_layer {
+            display-name = "Windows Default Layer";
+            bindings = <
+&kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y         &kp U   &kp I      &kp O      &kp P
+&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H         &kp J   &kp K      &lt 3 L    &kp RETURN
+&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N         &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
+&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 2 LANG2  &lt 3 SPACE  &lt 4 DELETE    &kp BACKSPACE  &lt 7 LANG1  &trans  &win_p     &master_p  &kp TAB
             >;
 
             sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
@@ -312,18 +324,6 @@
 &trans          &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
 &kp LCTRL       &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
             >;
-        };
-
-        win_default_layer {
-            display-name = "Windows Default Layer";
-            bindings = <
-&kp Q             &kp W         &kp E          &kp R        &kp T                                        &kp Y         &kp U   &kp I      &kp O      &kp P
-&mt LCTRL A       &kp S         &kp D          &kp F        &kp G                                        &kp H         &kp J   &kp K      &lt 2 L    &kp RETURN
-&mt LEFT_SHIFT Z  &kp X         &kp C          &kp V        &kp B                                        &kp N         &kp M   &mkp LCLK  &mkp RCLK  &mt LEFT_SHIFT SLASH
-&kp LWIN          &kp LEFT_ALT  &mt LCTRL ESC  &lt 1 LANG2  &lt 2 SPACE  &lt 3 DELETE    &kp BACKSPACE  &lt 6 LANG1  &trans  &win_p     &master_p  &kp TAB
-            >;
-
-            sensor-bindings = <&encoder_msc SCRL_DOWN SCRL_UP>;
         };
 
         win_arrow_overlay {
