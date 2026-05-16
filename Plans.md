@@ -130,7 +130,24 @@
 | I.3 | `conditional_layers` の `<1 3>` を `<1 2>` に戻す（win+arrow→8） | conditional_layers が新番号 | I.2 | cc:完了 |
 | I.4 | keymap ブロックの順序: `arrow_layer` を `mark_layer` より前に移動 | ブロック順序＝レイヤー番号 | I.3 | cc:完了 |
 | I.5 | 再ビルド（make 通常版 + 必要なら all_studio） | ビルド全グリーン | I.4 | cc:完了 |
-| I.6 | Win/Mac 実機で記号・BT・スクロール・OS 差オーバーレイ全部動くことを確認 | 全レイヤー動作 | I.5 | cc:TODO（要実機・ゆうご さん） |
+| I.6 | Win/Mac 実機で記号・BT・スクロール・OS 差オーバーレイ全部動くことを確認 | 全レイヤー動作 | I.5 | cc:完了（2026-05-17 確認済み） |
+
+### Phase J: Win 用 LGUI ショートカット復活（mark_layer 差分）
+
+実機検証で発覚した追加要件:
+- **症状**: Phase G 前の `win_mark_layer` row4 右親指位置に `&kp LGUI`（Windows キー単体）があったが、`win_mark_layer` 削除時に消えた
+- **元の挙動**: 左親指で `&lt 8 LANG2`（旧 win_mark）押下しながら右親指の `&lt 11 LANG1` 位置を押すと **LGUI**（スタートメニュー）が出る
+- **Mac の同じ位置**: `&kp LG(SPACE)`（Spotlight / IME 切替）→ Win ではこのままだと Windows+Space = 言語切替になり、スタートメニューを開けない
+- **対策**: `win_mark_overlay` (10) を新規追加し、`conditional_layers` で 1+3 のとき自動 on
+
+| Task | 内容 | DoD | Depends | Status |
+|------|------|-----|---------|--------|
+| J.1 | `win_mark_overlay` レイヤーブロックを追加（右親指位置 = `&kp LGUI`、他は `&trans`） | overlay ブロックが存在 | I.6 | cc:完了 |
+| J.2 | `conditional_layers` に `win_mark_overlay` を追加（`if-layers = <1 3>; then-layer = <10>`） | conditional_layers に新エントリ | J.1 | cc:完了 |
+| J.3 | `#define WIN_MARK_OVERLAY 10` を追加 | define が存在 | J.2 | cc:完了 |
+| J.4 | `combos` の `layers` を `<0..10>` に拡張 | layers が新範囲 | J.3 | cc:完了 |
+| J.5 | 再ビルド | ビルドグリーン | J.4 | cc:完了 |
+| J.6 | Win 実機で「左親指 mark hold + 右親指で LGUI（スタートメニュー）」が出ることを確認 | LGUI 動作 | J.5 | cc:TODO（要実機・ゆうご さん） |
 
 ---
 
@@ -148,8 +165,9 @@
 | 7 | `util_layer` | メディア / BT / 輝度 / Studio / デスクトップ移動 (Mac 仕様) | Mac/Win 共有（差分は #9 で吸収） |
 | 8 | `win_arrow_overlay` | Win 用 arrow 差分（HOME/END） | `conditional_layers` で 1+2 のとき on |
 | 9 | `win_util_overlay` | Win 用 util 差分（デスクトップ移動） | `conditional_layers` で 1+7 のとき on |
+| **10** | **`win_mark_overlay`** | **Win 用 mark 差分（右親指 = `LGUI`）** | **`conditional_layers` で 1+3 のとき on（Phase J）** |
 
-combos の `layers = <0 1 2 3 4 5 6 7 8 9>` に修正。
+combos の `layers = <0 1 2 3 4 5 6 7 8 9 10>` に修正。
 
 ---
 

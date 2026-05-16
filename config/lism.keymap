@@ -17,6 +17,7 @@
 #define UTIL_LAYER 7
 #define WIN_ARROW_OVERLAY 8
 #define WIN_UTIL_OVERLAY 9
+#define WIN_MARK_OVERLAY 10
 
 &mt { flavor = "balanced"; };
 
@@ -35,11 +36,16 @@
             if-layers = <1 7>;
             then-layer = <9>;
         };
+
+        win_mark_overlay {
+            if-layers = <1 3>;
+            then-layer = <10>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
-        layers = <0 1 2 3 4 5 6 7 8 9>;
+        layers = <0 1 2 3 4 5 6 7 8 9 10>;
 
         tab {
             bindings = <&kp TAB>;
@@ -343,6 +349,16 @@
 &trans  &trans  &trans  &trans  &trans                    &kp LG(LC(LEFT))  &kp LG(D)  &kp LG(TAB)  &kp LG(LC(RIGHT))   &trans
 &trans  &trans  &trans  &trans  &trans                    &trans            &trans     &trans       &trans              &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans     &trans       &trans              &trans
+            >;
+        };
+
+        win_mark_overlay {
+            display-name = "Win Mark Overlay";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans     &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans     &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans     &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp LGUI   &trans  &trans  &trans  &trans
             >;
         };
     };
