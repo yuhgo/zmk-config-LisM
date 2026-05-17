@@ -1,6 +1,6 @@
 # zmk-config-LisM Plans.md
 
-最終更新: 2026-05-16
+最終更新: 2026-05-17
 
 このリポジトリのアクティブなタスクを管理する。詳細な計画は `docs/plan/` 配下の個別ファイルに記述する。
 
@@ -148,6 +148,25 @@
 | J.4 | `combos` の `layers` を `<0..10>` に拡張 | layers が新範囲 | J.3 | cc:完了 |
 | J.5 | 再ビルド | ビルドグリーン | J.4 | cc:完了 |
 | J.6 | Win 実機で「左親指 mark hold + 右親指で LGUI（スタートメニュー）」が出ることを確認 | LGUI 動作 | J.5 | cc:TODO（要実機・ゆうご さん） |
+
+### Phase K: 3 台目の PC も Windows として扱う
+
+要件:
+- BT0 = Mac、BT1 = Win、**BT2 = Win**（3 台目も Windows）
+- 現状 Util Layer の `&bt BT_SEL 2` は単に BT プロファイルを切り替えるだけで、`win_default_layer` を on にしない → Mac レイヤーのままになる
+- `bt_win` マクロ相当の「BT プロファイル切替 + `win_default_layer` を on」を BT2 用にも用意する
+
+設計:
+- 新マクロ `bt_win2` を追加（`bt_win` をコピーして `BT_SEL 1` → `BT_SEL 2` に変更）
+- Util Layer の `&bt BT_SEL 2`（row1 右側、`bt_win` の隣）を `&bt_win2` に置き換え
+- レイヤー番号変更なし、conditional_layers 変更なし、combos 変更なし（影響範囲はマクロ追加 + 1 キー差し替えのみ）
+
+| Task | 内容 | DoD | Depends | Status |
+|------|------|-----|---------|--------|
+| K.1 | `bt_win2` マクロを `macros` ブロックに追加（`bt_win` をコピーし `BT_SEL 1` を `BT_SEL 2` に変更） | macros に `bt_win2` が存在 | J.5 | cc:完了 |
+| K.2 | `util_layer` の row1 にある `&bt BT_SEL 2` を `&bt_win2` に置き換え | util_layer の該当位置が `&bt_win2` | K.1 | cc:完了 |
+| K.3 | Dev Container で右側ファームウェアをビルド（`mise run dc-exec make single` で `lism_right_*` を選択、または `make`） | `firmware_builds/*.uf2` が生成される | K.2 | cc:完了（2026-05-17 ビルドグリーン） |
+| K.4 | 実機で 3 台目の Windows PC に BT2 で接続し、自動で Win レイヤーになることを確認 | BT2 接続で Win レイヤー動作 | K.3 | cc:TODO（要実機・ゆうご さん） |
 
 ---
 

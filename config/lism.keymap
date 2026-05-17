@@ -175,6 +175,17 @@
             label = "BT_WIN";
         };
 
+        bt_win2: bt_win2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&toggle_off 1>,
+                <&macro_wait_time 100>,
+                <&bt BT_SEL 2 &toggle_on 1>;
+
+            label = "BT_WIN2";
+        };
+
         win_p: win_p {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -325,7 +336,7 @@
         util_layer {
             display-name = "Util Layer";
             bindings = <
-&studio_unlock  &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt BT_SEL 2      &bt BT_SEL 3   &bt BT_SEL 4
+&studio_unlock  &kp C_BRIGHTNESS_DEC  &trans        &kp C_BRIGHTNESS_INC  &trans                    &bt_mac             &bt_win             &bt_win2          &bt BT_SEL 3   &bt BT_SEL 4
 &trans          &kp C_VOLUME_DOWN     &kp K_MUTE    &kp C_VOLUME_UP       &trans                    &kp RC(LEFT_ARROW)  &kp RC(DOWN_ARROW)  &kp RC(UP_ARROW)  &kp RC(RIGHT)  &trans
 &trans          &trans                &trans        &trans                &trans                    &trans              &trans              &trans            &trans         &bt BT_CLR
 &kp LCTRL       &kp LEFT_ALT          &kp LEFT_WIN  &trans                &trans  &trans    &trans  &trans              &trans              &trans            &trans         &bt BT_CLR_ALL
