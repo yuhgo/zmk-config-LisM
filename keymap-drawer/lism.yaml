@@ -82,7 +82,7 @@ layers:
   - {t: DEL, h: Function Number Layer}
   - BS
   - {t: LANG1, h: Util Layer}
-  - {t: ▽, type: trans}
+  - '&win2_p'
   - '&win_p'
   - '&master_p'
   - TAB
