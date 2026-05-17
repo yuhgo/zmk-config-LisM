@@ -309,7 +309,7 @@ layers:
   - {t: ▽, type: trans}
   - '&bt_mac'
   - '&bt_win'
-  - {t: BT, h: '2'}
+  - '&bt_win2'
   - {t: BT, h: '3'}
   - {t: BT, h: '4'}
   - {t: ▽, type: trans}
