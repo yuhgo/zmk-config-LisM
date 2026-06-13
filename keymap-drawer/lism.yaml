@@ -82,7 +82,7 @@ layers:
   - {t: DEL, h: Function Number Layer}
   - BS
   - {t: LANG1, h: Util Layer}
-  - '&win2_p'
+  - {t: ▽, type: trans}
   - '&win_p'
   - '&master_p'
   - TAB
@@ -310,8 +310,8 @@ layers:
   - '&bt_mac'
   - '&bt_win'
   - '&bt_win2'
-  - {t: BT, h: '3'}
-  - {t: BT, h: '4'}
+  - '&bt_win3'
+  - '&bt_win4'
   - {t: ▽, type: trans}
   - VOLUME DOWN
   - MUTE
@@ -471,6 +471,49 @@ layers:
   - LGUI
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  Win2 Password Layer:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&win2_p'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
 combos:
